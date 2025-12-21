@@ -19,7 +19,7 @@
                 <h1 class="text-3xl font-bold text-gray-800 mb-4">{{product.product_name}}</h1>
                 <p class="text-sm text-gray-500 mb-4">Part #: {{product.parts}}</p>
                 <div id="product-pricing" class="mb-6">
-                    {% if product.old_price %}
+                    {% if not product.old_price %}
                     <div id="old-price" class="text-lg text-gray-400 line-through hidden">&pound; {{product.old_price}}</div>
                     {% endif %}
                     <div class="text-3xl font-bold text-aviation-blue">&pound; {{product.price}}</div>
