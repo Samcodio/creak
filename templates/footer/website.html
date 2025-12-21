@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Website Terms & Conditions | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+
+    <style>
+        * { transition: all 0.3s ease; }
+        body { font-family: 'Roboto', sans-serif; scroll-behavior: smooth; }
+        :root { --aviation-blue: #005eb8; --aviation-accent: #004c97; }
+        .aviation-blue { color: var(--aviation-blue); }
+        .bg-aviation-blue { background-color: var(--aviation-blue); }
+    </style>
+
+    <div class="bg-gray-50 py-3 border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <nav class="flex text-sm">
+                <a href="{% url 'product:home' %}" class="text-aviation-blue hover:underline">Home</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-gray-600">Website Terms & Conditions</span>
+            </nav>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        <h1 class="text-4xl font-bold text-gray-800 mb-6">WEBSITE TERMS & CONDITIONS</h1>
+        <p class="text-gray-600 mb-8">Last updated: January 2025 | Version 2.1</p>
+
+        <div class="prose max-w-none">
+            <div class="bg-blue-50 p-6 rounded-lg mb-8">
+                <p class="text-gray-700">These terms and conditions govern your use of the Aviation Spares & Repairs website and constitute a legally binding agreement between you and Aviation Spares & Repairs Ltd.</p>
+            </div>
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">1. Definitions</h2>
+            <p class="text-gray-600 mb-6">"Company" refers to Aviation Spares & Repairs Ltd (Registration: 05347543). "User" refers to any person accessing or using this website. "Services" refers to all products, information, and services provided through this website.</p>
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">2. Acceptance and Modification</h2>
+            <p class="text-gray-600 mb-6">By accessing this website, you agree to these terms. We reserve the right to modify these terms at any time. Continued use constitutes acceptance of modified terms.</p>
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">3. Permitted Use</h2>
+            <p class="text-gray-600 mb-6">This website is intended for legitimate business purposes related to aviation equipment procurement. Users must not engage in any unlawful activities or attempt to compromise website security.</p>
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">4. Intellectual Property</h2>
+            <p class="text-gray-600 mb-6">All content, trademarks, and intellectual property on this website are owned by Aviation Spares & Repairs Ltd or licensed to us. Unauthorized use is prohibited.</p>
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">5. Limitation of Liability</h2>
+            <p class="text-gray-600 mb-6">Our liability is limited to the maximum extent permitted by English law. We exclude liability for indirect, consequential, or special damages.</p>
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">6. Governing Law</h2>
+            <p class="text-gray-600 mb-6">These terms are governed by English law and subject to the exclusive jurisdiction of English courts.</p>
+        </div>
+    </main>
+
+{% endblock %}

@@ -1,0 +1,282 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Product Catalogue | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --aviation-blue: #005eb8;
+            --aviation-accent: #004c97;
+        }
+
+        .aviation-blue { color: var(--aviation-blue); }
+        .bg-aviation-blue { background-color: var(--aviation-blue); }
+
+
+        .product-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--aviation-blue);
+        }
+
+        /* Toast Notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2d3748; /* bg-gray-800 */
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .toast-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Cart Animation */
+        .cart-shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+          10%, 90% { transform: translate3d(-1px, 0, 0); }
+          20%, 80% { transform: translate3d(2px, 0, 0); }
+          30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+          40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+
+    </style>
+
+
+    <div class="bg-gray-50 py-3 border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <nav class="flex text-sm">
+                <a href="{% url 'product:products' %}" class="text-aviation-blue hover:underline">Home</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-gray-600">Products</span>
+            </nav>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Products Catalogue</h1>
+            <p class="text-gray-600">Browse our comprehensive range of aviation spares, ground support equipment, and tooling solutions</p>
+            <div class="mt-4 p-4 bg-blue-50 rounded">
+                <p class="text-sm text-blue-700"><strong>Note:</strong> If images don't load immediately, please refresh the page. All product images are available in our catalog.</p>
+            </div>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="mb-8">
+            <div class="flex flex-wrap gap-2 mb-4">
+                <button class="category-filter bg-aviation-blue text-white px-4 py-2 rounded text-sm" data-category-id="all">All Products</button>
+
+                {% for cat in category %}
+                <button class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded text-sm hover:bg-gray-300" data-category="{{cat.category_name}}" data-category-id="{{ cat.id }}">
+                    {{cat.category_name}}</button>
+                {% endfor %}
+            </div>
+            <div class="flex items-center gap-4">
+                <input type="text" id="search-products" placeholder="Search products..." class="border border-gray-300 rounded px-3 py-2 text-sm flex-1 max-w-md">
+                <select id="sort-products" class="border border-gray-300 rounded px-3 py-2 text-sm">
+                    <option value="name">Sort by Name</option>
+                    <option value="category">Sort by Category</option>
+                    <option value="newest">Newest First</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" >
+<!--            <p class="col-span-full text-center text-gray-500">Loading products...</p>-->
+            {% for item in products %}
+                <div class="product-card bg-white rounded overflow-hidden cursor-pointer" data-category-id="{{ item.category.id }}">
+                    <a href="{% url 'product:product_detail' item.id %}">
+                    <div class="h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
+                        <img src="{{item.product_pic}}" alt="${{item.product_name}}" class="h-full w-auto object-contain" onerror="this.src='{% static 'assets/images/products/aircraft-valve.png' %}'">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-gray-800 mb-1">{{item.product_name}}</h3>
+                        <p class="text-gray-600 text-sm mb-2">{{item.description|truncatechars:30}}</p>
+                        <p class="text-xs text-gray-500 mb-3">Part #: {{item.parts}}</p>
+                        <div class="flex justify-between items-center">
+                            <button class="add-to-cart bg-aviation-blue text-white text-xs font-bold py-2 px-4 rounded hover:bg-blue-700" >Add to Cart</button>
+                            <div class="text-right">
+                                {% if item.old_price %}
+                                <div class="text-gray-400 text-xs line-through">&pound; {{item.old_price}}</div>
+                                {% endif %}
+                                <div class="text-aviation-blue text-sm font-bold">&pound; {{item.price}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-8 flex justify-center">
+            <div class="flex items-center space-x-2 text-sm">
+
+                <!-- Previous -->
+                {% if products.has_previous %}
+                    <a href="?page={{ products.previous_page_number }}"
+                       class="px-3 py-2 border rounded hover:bg-gray-100">
+                        Previous
+                    </a>
+                {% else %}
+                    <span class="px-3 py-2 border rounded opacity-50 cursor-not-allowed">
+                        Previous
+                    </span>
+                {% endif %}
+
+                {% if products.paginator.num_pages <= 6 %}
+
+                    <!-- Show all pages if small -->
+                    {% for num in products.paginator.page_range %}
+                        {% if num == products.number %}
+                            <span class="px-3 py-2 border rounded bg-aviation-blue text-white font-bold">
+                                {{ num }}
+                            </span>
+                        {% else %}
+                            <a href="?page={{ num }}"
+                               class="px-3 py-2 border rounded hover:bg-gray-100">
+                                {{ num }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+
+                {% else %}
+
+                    <!-- First 3 -->
+                    {% for num in products.paginator.page_range %}
+                        {% if num <= 3 %}
+                            {% if num == products.number %}
+                                <span class="px-3 py-2 border rounded bg-aviation-blue text-white font-bold">
+                                    {{ num }}
+                                </span>
+                            {% else %}
+                                <a href="?page={{ num }}"
+                                   class="px-3 py-2 border rounded hover:bg-gray-100">
+                                    {{ num }}
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    <span class="px-2">...</span>
+
+                    <!-- Last 3 -->
+                    {% for num in products.paginator.page_range %}
+                        {% if num > products.paginator.num_pages|add:'-3' %}
+                            {% if num == products.number %}
+                                <span class="px-3 py-2 border rounded bg-aviation-blue text-white font-bold">
+                                    {{ num }}
+                                </span>
+                            {% else %}
+                                <a href="?page={{ num }}"
+                                   class="px-3 py-2 border rounded hover:bg-gray-100">
+                                    {{ num }}
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                {% endif %}
+
+                <!-- Next -->
+                {% if products.has_next %}
+                    <a href="?page={{ products.next_page_number }}"
+                       class="px-3 py-2 border rounded hover:bg-gray-100">
+                        Next
+                    </a>
+                {% else %}
+                    <span class="px-3 py-2 border rounded opacity-50 cursor-not-allowed">
+                        Next
+                    </span>
+                {% endif %}
+
+            </div>
+        </div>
+
+
+    </main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const categoryButtons = document.querySelectorAll(".category-filter");
+    const products = document.querySelectorAll(".product-card");
+
+    categoryButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const selectedCategoryId = button.dataset.categoryId;
+
+            /* ==========================
+               Active button styling
+            ========================== */
+            categoryButtons.forEach(btn => {
+                btn.classList.remove("bg-aviation-blue", "text-white");
+                btn.classList.add("bg-gray-200", "text-gray-700");
+            });
+
+            button.classList.remove("bg-gray-200", "text-gray-700");
+            button.classList.add("bg-aviation-blue", "text-white");
+
+            /* ==========================
+               Show all products
+            ========================== */
+            if (selectedCategoryId === "all") {
+                products.forEach(product => {
+                    product.style.display = "block";
+                });
+                return;
+            }
+
+            /* ==========================
+               Filter by category
+            ========================== */
+            products.forEach(product => {
+                const productCategoryId = product.dataset.categoryId;
+
+                if (productCategoryId === selectedCategoryId) {
+                    product.style.display = "block";
+                } else {
+                    product.style.display = "none";
+                }
+            });
+        });
+    });
+
+});
+</script>
+
+
+{% endblock %}

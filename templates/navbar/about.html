@@ -1,0 +1,520 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>About Us | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --aviation-blue: #005eb8;
+            --aviation-dark: #1a1a1a;
+            --aviation-gray: #f5f5f5;
+            --aviation-accent: #004c97;
+            --aviation-red: #e31e24;
+        }
+
+        .aviation-blue { color: var(--aviation-blue); }
+        .bg-aviation-blue { background-color: var(--aviation-blue); }
+        .border-aviation-blue { border-color: var(--aviation-blue); }
+
+        .aviation-red { color: var(--aviation-red); }
+        .bg-aviation-red { background-color: var(--aviation-red); }
+
+        /* About section styles */
+        .about-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 94, 184, 0.1) 0%, rgba(0, 94, 184, 0.05) 100%);
+            z-index: -1;
+        }
+
+        /* Values card styles */
+        .value-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border-color: var(--aviation-blue);
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--aviation-blue);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .value-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Timeline styles */
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: white;
+            border: 3px solid var(--aviation-blue);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 25px;
+            width: 2px;
+            height: calc(100% + 10px);
+            background-color: var(--aviation-blue);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        /* Team member styles */
+        .team-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border-color: var(--aviation-blue);
+        }
+
+        .team-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-card:hover .team-image {
+            transform: scale(1.05);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Statistics counter */
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--aviation-blue);
+            line-height: 1;
+        }
+
+
+    </style>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-50 py-3 border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <nav class="flex text-sm">
+                <a href="{% url 'product:home' %}" class="text-aviation-blue hover:underline">Home</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-gray-600">About Us</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <div class="about-section rounded-xl p-8 md:p-12 mb-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">ABOUT US</h1>
+                    <div class="w-24 h-1 bg-aviation-blue mb-8"></div>
+                    <p class="text-lg text-gray-600 mb-6">
+                        At Aviation Spares & Repairs, we support all sectors of the aviation industry and supply ground support equipment and ground handling equipment to a global network of corporate, private, commercial and military customers, including FBOs and MRO facilities.
+                    </p>
+                    <div class="flex items-center space-x-6">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-aviation-blue mb-2">30+</div>
+                            <div class="text-sm text-gray-600">Years Experience</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-aviation-blue mb-2">2</div>
+                            <div class="text-sm text-gray-600">Global Offices</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-aviation-blue mb-2">500+</div>
+                            <div class="text-sm text-gray-600">Clients Worldwide</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                         alt="Aviation Spares & Repairs Team"
+                         class="rounded-lg shadow-xl">
+                </div>
+            </div>
+        </div>
+
+        <!-- Who We Are Section -->
+        <section class="mb-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Who We Are</h2>
+                    <p class="text-gray-600 mb-4">
+                        We are specialists with over 30 years' experience in aviation supply chain management, making us the partner of choice for your aircraft servicing and ground handling needs. We understand the challenges that arise from having a never-ending list of suppliers, and for this reason, we are capable of sourcing all the aviation equipment you require, saving you both time and effort.
+                    </p>
+                    <p class="text-gray-600 mb-6">
+                        Our business model focuses on providing a responsive, effective and reliable service from the initial enquiry to delivery of goods and on-going aftermarket support. Our professionals offer full management of resources to meet surge demands, from the acquisition of raw materials and production through to the distribution of products to the customer in the most streamlined and cost-effective way possible.
+                    </p>
+                    <a href="capabilities.html" class="inline-flex items-center bg-aviation-blue text-white font-bold py-3 px-6 rounded hover:bg-aviation-accent transition-colors">
+                        <span>View Our Capabilities</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="value-card bg-white rounded-lg p-6">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
+                            <i class="fas fa-boxes text-xl text-aviation-blue"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Vast Inventory</h3>
+                        <p class="text-gray-600 text-sm">Competitive and high-quality products for prompt turnaround</p>
+                    </div>
+                    <div class="value-card bg-white rounded-lg p-6">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
+                            <i class="fas fa-pound-sign text-xl text-aviation-blue"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Value for Money</h3>
+                        <p class="text-gray-600 text-sm">Identifying approved alternatives to save customer money</p>
+                    </div>
+                    <div class="value-card bg-white rounded-lg p-6">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
+                            <i class="fas fa-shipping-fast text-xl text-aviation-blue"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Consolidated Shipping</h3>
+                        <p class="text-gray-600 text-sm">Working to decrease shipping fees through material consolidation</p>
+                    </div>
+                    <div class="value-card bg-white rounded-lg p-6">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
+                            <i class="fas fa-headset text-xl text-aviation-blue"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Aftermarket Support</h3>
+                        <p class="text-gray-600 text-sm">Ongoing support and service after delivery</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Expertise Section -->
+        <section class="bg-gray-50 rounded-xl p-8 mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Our Expertise</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-plane text-aviation-blue"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Supply Chain Management</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        Over 30 years of specialized experience in aviation supply chain management, optimizing procurement, inventory, and distribution processes for maximum efficiency.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-globe-americas text-aviation-blue"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Global Network</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        Serving corporate, private, commercial and military customers worldwide, including FBOs and MRO facilities across different continents.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-tools text-aviation-blue"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Product Range</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        Extensive range of new or obsolete products including ground support equipment, military aviation equipment, commercial aviation equipment, aircraft tooling solutions and PPE.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Journey Timeline -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Our Journey</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="timeline-item">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-800">Company Foundation</h3>
+                            <span class="bg-aviation-blue text-white px-3 py-1 rounded text-sm font-bold">1995</span>
+                        </div>
+                        <p class="text-gray-600">Aviation Spares & Repairs was established to serve the growing needs of the aviation industry with specialized equipment and parts.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-800">ISO 9001 Certification</h3>
+                            <span class="bg-aviation-blue text-white px-3 py-1 rounded text-sm font-bold">2005</span>
+                        </div>
+                        <p class="text-gray-600">Achieved ISO 9001 certification, demonstrating our commitment to quality management systems and continuous improvement.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-800">Global Expansion</h3>
+                            <span class="bg-aviation-blue text-white px-3 py-1 rounded text-sm font-bold">2015</span>
+                        </div>
+                        <p class="text-gray-600">Expanded operations with the opening of our US office, strengthening our ability to serve North American customers.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-800">30+ Years Celebration</h3>
+                            <span class="bg-aviation-blue text-white px-3 py-1 rounded text-sm font-bold">2025</span>
+                        </div>
+                        <p class="text-gray-600">Celebrating over 30 years of excellence in aviation supply chain management, serving clients worldwide with innovative solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Values -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Our Core Values</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-aviation-blue text-white rounded-lg p-6 text-center">
+                    <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Reliability</h3>
+                    <p class="text-white/90">Consistent, dependable service from enquiry through to aftermarket support</p>
+                </div>
+                <div class="bg-gray-800 text-white rounded-lg p-6 text-center">
+                    <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-handshake text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Partnership</h3>
+                    <p class="text-white/90">Building long-term relationships based on trust and mutual success</p>
+                </div>
+                <div class="bg-gray-700 text-white rounded-lg p-6 text-center">
+                    <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bullseye text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Excellence</h3>
+                    <p class="text-white/90">Striving for the highest standards in quality and service delivery</p>
+                </div>
+                <div class="bg-aviation-accent text-white rounded-lg p-6 text-center">
+                    <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-lightbulb text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Innovation</h3>
+                    <p class="text-white/90">Continuously improving processes and solutions for our clients</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Range -->
+        <section class="bg-gray-50 rounded-xl p-8 mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Our Product Range</h2>
+            <p class="text-gray-600 text-center max-w-3xl mx-auto mb-8">
+                We have the capacity of supplying an extensive range of either new or obsolete products, including:
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                <div class="bg-white p-4 rounded text-center">
+                    <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-truck text-xl text-aviation-blue"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800">Ground Support Equipment</h4>
+                </div>
+                <div class="bg-white p-4 rounded text-center">
+                    <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-fighter-jet text-xl text-aviation-blue"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800">Military Aviation Equipment</h4>
+                </div>
+                <div class="bg-white p-4 rounded text-center">
+                    <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-plane text-xl text-aviation-blue"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800">Commercial Aviation Equipment</h4>
+                </div>
+                <div class="bg-white p-4 rounded text-center">
+                    <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-tools text-xl text-aviation-blue"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800">Aircraft Tooling Solutions</h4>
+                </div>
+                <div class="bg-white p-4 rounded text-center">
+                    <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-hard-hat text-xl text-aviation-blue"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800">Personal Protective Equipment</h4>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a href="listing.html" class="inline-flex items-center text-aviation-blue font-bold hover:underline">
+                    <span>View our full range of products on our A-Z listing page</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Get In Touch</h2>
+                <p class="text-gray-600 mb-6">
+                    Regardless of your global location or operational set-up, Aviation Spares & Repairs is your go-to supplier for all your aviation needs. If you require any further information about us, please don't hesitate to contact our team.
+                </p>
+
+                <div class="space-y-6 mb-8">
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-phone text-aviation-blue"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Phone</h4>
+                            <p class="text-gray-600">+44 (0) 1794 834 438</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-envelope text-aviation-blue"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Email</h4>
+                            <p class="text-gray-600">info@aviation.uk.net</p>
+                            <p class="text-gray-600">sales@aviationspares.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-map-marker-alt text-aviation-blue"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Address</h4>
+                            <p class="text-gray-600">Unit 6 Westlink, Romsey, Hampshire, SO51 7AA</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <h4 class="font-bold text-gray-800 mb-2">Business Hours</h4>
+                    <p class="text-gray-600 mb-1">Monday - Friday: 8:00 AM - 6:00 PM GMT</p>
+                    <p class="text-gray-600 mb-1">Saturday: 9:00 AM - 1:00 PM GMT</p>
+                    <p class="text-gray-600">Sunday: Closed</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="bg-aviation-blue text-white rounded-xl p-8 h-full">
+                    <h3 class="text-2xl font-bold mb-6">Why Choose Aviation Spares & Repairs?</h3>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
+                            <span>30+ years of specialized aviation supply chain experience</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
+                            <span>Global network serving corporate, commercial, and military sectors</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
+                            <span>Comprehensive range of new and obsolete aviation products</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
+                            <span>Cost-effective solutions with value for money focus</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
+                            <span>Responsive service from enquiry to aftermarket support</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle mt-1 mr-3"></i>
+                            <span>ISO 9001:2023 certified quality management system</span>
+                        </li>
+                    </ul>
+
+                    <a href="{% url 'product:contact' %}" class="inline-block bg-white text-black font-bold py-3 px-6 rounded hover:bg-gray-100 transition-colors">
+                        CONTACT US TODAY
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+{% endblock %}

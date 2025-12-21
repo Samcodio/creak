@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>{{category.category_name}} | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+
+    <style>
+
+        * {
+            transition: all 0.3s ease;
+        }
+
+        body {
+            scroll-behavior: smooth;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .partner-logo {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        button, .btn, a {
+            transition: all 0.2s ease;
+        }
+
+        button:hover, .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .product-image {
+            transition: transform 0.5s ease;
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .partners-slider {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .partners-track {
+            display: flex;
+            animation: scroll 20s linear infinite;
+            width: calc(200% + 20px);
+        }
+
+        .partner-item {
+            flex: 0 0 150px;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .partner-logo {
+            max-width: 160px;
+            max-height: 80px;
+            object-fit: contain;
+            opacity: 0.9;
+        }
+
+        .partner-logo:hover {
+            opacity: 1;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+
+<section class="relative w-full h-[300px] md:h-[400px] bg-cover bg-center" style="background-image: url('{% static 'assets/images/categories/tool-menu-1.jpg' %}');">
+        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="container mx-auto h-full px-4 flex flex-col justify-center items-center text-center relative z-10">
+            <h1 class="text-3xl md:text-5xl font-bold text-white mb-2 leading-tight">
+              {{category.category_name}}
+            </h1>
+            <p class="text-lg font-light text-gray-200">
+                {{category.Description}}
+            </p>
+        </div>
+    </section>
+
+    <section class="container mx-auto px-4 py-12">
+        <div class="max-w-5xl mx-auto text-center">
+<!--            <p class="text-sm text-gray-700 leading-relaxed">-->
+<!--                <span class="font-bold">Aviation Spares and Repairs Ltd</span> provides comprehensive tooling solutions for the aviation industry. We offer a wide range of high-quality tools, from basic hand tools to specialized aircraft maintenance equipment, ensuring that your technicians have everything they need to maintain your fleet.-->
+<!--            </p>-->
+<!--            <p class="text-sm text-gray-700 leading-relaxed mt-4">-->
+<!--                Our tooling solutions include tool control and management systems, custom-designed tool kits, and calibration services. We partner with leading manufacturers to provide durable, reliable, and compliant tools that enhance efficiency and safety in your maintenance operations.-->
+<!--            </p>-->
+        </div>
+    </section>
+
+    <section class="bg-gray-50 py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">{{category.category_name}} Product Highlights</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-2 md:gap-x-4 gap-y-8 md:gap-y-12">
+
+                {% for item in products %}
+                <a href="{% url 'product:product_detail' item.id %}" class="product-card flex flex-col items-center text-center group cursor-pointer">
+                    <div class="w-full bg-white p-6 mb-4 hover:shadow-lg transition-all border border-transparent hover:border-gray-100 flex items-center justify-center h-40 product-image-container">
+                        <img src="{{item.product_pic}}"
+                             alt="{{item.product_name}}"
+                             class="max-h-full max-w-full mix-blend-multiply product-image">
+                    </div>
+                    <span class="text-xs font-medium text-gray-700 group-hover:text-aviation-blue transition-colors px-2">
+                        {{item.product_name}}
+                    </span>
+                </a>
+                {% endfor %}
+
+            </div>
+                    <!-- Pagination -->
+        <div class="mt-8 flex justify-center">
+            <div class="flex items-center space-x-2 text-sm">
+
+                <!-- Previous -->
+                {% if products.has_previous %}
+                    <a href="?page={{ products.previous_page_number }}"
+                       class="px-3 py-2 border rounded hover:bg-gray-100">
+                        Previous
+                    </a>
+                {% else %}
+                    <span class="px-3 py-2 border rounded opacity-50 cursor-not-allowed">
+                        Previous
+                    </span>
+                {% endif %}
+
+                {% if products.paginator.num_pages <= 6 %}
+
+                    <!-- Show all pages if small -->
+                    {% for num in products.paginator.page_range %}
+                        {% if num == products.number %}
+                            <span class="px-3 py-2 border rounded bg-aviation-blue text-white font-bold">
+                                {{ num }}
+                            </span>
+                        {% else %}
+                            <a href="?page={{ num }}"
+                               class="px-3 py-2 border rounded hover:bg-gray-100">
+                                {{ num }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+
+                {% else %}
+
+                    <!-- First 3 -->
+                    {% for num in products.paginator.page_range %}
+                        {% if num <= 3 %}
+                            {% if num == products.number %}
+                                <span class="px-3 py-2 border rounded bg-aviation-blue text-white font-bold">
+                                    {{ num }}
+                                </span>
+                            {% else %}
+                                <a href="?page={{ num }}"
+                                   class="px-3 py-2 border rounded hover:bg-gray-100">
+                                    {{ num }}
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    <span class="px-2">...</span>
+
+                    <!-- Last 3 -->
+                    {% for num in products.paginator.page_range %}
+                        {% if num > products.paginator.num_pages|add:'-3' %}
+                            {% if num == products.number %}
+                                <span class="px-3 py-2 border rounded bg-aviation-blue text-white font-bold">
+                                    {{ num }}
+                                </span>
+                            {% else %}
+                                <a href="?page={{ num }}"
+                                   class="px-3 py-2 border rounded hover:bg-gray-100">
+                                    {{ num }}
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                {% endif %}
+
+                <!-- Next -->
+                {% if products.has_next %}
+                    <a href="?page={{ products.next_page_number }}"
+                       class="px-3 py-2 border rounded hover:bg-gray-100">
+                        Next
+                    </a>
+                {% else %}
+                    <span class="px-3 py-2 border rounded opacity-50 cursor-not-allowed">
+                        Next
+                    </span>
+                {% endif %}
+
+            </div>
+        </div>
+        </div>
+    </section>
+
+
+{% endblock %}

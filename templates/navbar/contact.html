@@ -1,0 +1,572 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Contact Us | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+    <!-- Custom Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --aviation-blue: #005eb8;
+            --aviation-dark: #1a1a1a;
+            --aviation-gray: #f5f5f5;
+            --aviation-accent: #004c97;
+            --aviation-red: #e31e24;
+        }
+
+        .aviation-blue { color: var(--aviation-blue); }
+        .bg-aviation-blue { background-color: var(--aviation-blue); }
+        .border-aviation-blue { border-color: var(--aviation-blue); }
+
+        .aviation-red { color: var(--aviation-red); }
+        .bg-aviation-red { background-color: var(--aviation-red); }
+
+        /* Contact form styles */
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            padding: 0.75rem;
+            width: 100%;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus,
+        .contact-form select:focus {
+            outline: none;
+            border-color: var(--aviation-blue);
+            box-shadow: 0 0 0 3px rgba(0, 94, 184, 0.1);
+        }
+
+        .contact-form label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+
+        .char-counter {
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-align: right;
+            margin-top: 0.25rem;
+        }
+
+        /* Checkbox styling */
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 1rem;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: 1rem;
+            height: 1rem;
+            margin-top: 0.25rem;
+            margin-right: 0.75rem;
+            accent-color: var(--aviation-blue);
+        }
+
+        .checkbox-container label {
+            font-size: 0.875rem;
+            color: #4b5563;
+            line-height: 1.4;
+        }
+
+        /* Contact info card */
+        .contact-info-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--aviation-blue);
+        }
+
+        /* Address styling */
+        .address-line {
+            margin-bottom: 0.25rem;
+            color: #4b5563;
+        }
+
+        /* Company details grid */
+        .company-detail-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .company-detail-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Send button */
+        .send-button {
+            background-color: var(--aviation-blue);
+            color: white;
+            font-weight: bold;
+            padding: 0.75rem 2rem;
+            border-radius: 0.375rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .send-button:hover {
+            background-color: var(--aviation-accent);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .send-button:active {
+            transform: translateY(0);
+        }
+
+        /* Map placeholder */
+        .map-placeholder {
+            background-color: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Required field indicator */
+        .required::after {
+            content: ' *';
+            color: #ef4444;
+        }
+    </style>
+    <!-- Breadcrumb -->
+    <div class="bg-gray-50 py-3 border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <nav class="flex text-sm">
+                <a href="{% url 'product:home' %}" class="text-aviation-blue hover:underline">Home</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-gray-600">Contact Us</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">CONTACT US</h1>
+            <p class="text-gray-600 max-w-3xl">
+                Please contact us for further information on our GSE catalogue or for product and ordering information.
+            </p>
+        </div>
+
+        <!-- Contact Form and Info -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            <!-- Contact Form -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 contact-form">
+                    <form id="contactForm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="required">Name</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    required
+                                    placeholder="Your full name"
+                                >
+                            </div>
+                            <div>
+                                <label for="company">Company Name</label>
+                                <input
+                                    type="text"
+                                    id="company"
+                                    name="company"
+                                    placeholder="Your company name"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="email" class="required">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                placeholder="your.email@example.com"
+                            >
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="message" class="required">Message</label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="6"
+                                required
+                                placeholder="Please provide details about your enquiry..."
+                                maxlength="500"
+                            ></textarea>
+                            <div class="char-counter">
+                                <span id="charCount">500</span> characters remaining
+                            </div>
+                        </div>
+
+                        <div class="checkbox-container mb-6">
+                            <input type="checkbox" id="consent" name="consent">
+                            <label for="consent">
+                                Allow Aviation Spares & Repairs to contact me via email/phone to discuss this enquiry.
+                                If you would like to know more about the way we handle your data, please view our
+                                <a href="../footer-pages/privacy-policy.html" class="text-aviation-blue hover:underline">Privacy Policy</a>
+                            </label>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="send-button">
+                                SEND
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="mt-8 bg-blue-50 border border-blue-100 rounded-lg p-6">
+                    <h3 class="font-bold text-gray-800 mb-4">Need Immediate Assistance?</h3>
+                    <p class="text-gray-600 mb-4">
+                        For urgent enquiries or to place an order, please use our direct contact information below.
+                        Our team is available during business hours to assist you.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="space-y-8">
+                <!-- Contact Details Card -->
+                <div class="contact-info-card p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Contact Information</h3>
+
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex items-start mb-3">
+
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-start mb-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                    <i class="fas fa-envelope text-aviation-blue"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-700 mb-1">Email</div>
+                                    <div class="text-gray-600">sales@aviationspares.com</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-gray-200">
+                        <h4 class="font-bold text-gray-700 mb-4">Address</h4>
+                        <div class="text-gray-600">
+                            <div class="address-line">Aviation Spares & Repairs</div>
+                            <div class="address-line">Unit 6 Westlink</div>
+                            <div class="address-line">Bellone Business Park</div>
+                            <div class="address-line">Oppermann Lane</div>
+                            <div class="address-line">Romsey</div>
+                            <div class="address-line">Hampshire</div>
+                            <div class="address-line">SO51 7AA</div>
+                            <div class="address-line font-medium mt-2">United Kingdom</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Company Details -->
+                <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                    <div class="bg-gray-800 text-white p-4">
+                        <h3 class="font-bold">Company Details</h3>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        <div class="company-detail-item">
+                            <div class="text-sm text-gray-500">VAT No</div>
+                            <div class="font-bold">857 7031 07</div>
+                        </div>
+                        <div class="company-detail-item">
+                            <div class="text-sm text-gray-500">CAGE Code</div>
+                            <div class="font-bold">KCV81</div>
+                        </div>
+                        <div class="company-detail-item">
+                            <div class="text-sm text-gray-500">DUNS No</div>
+                            <div class="font-bold">345372606</div>
+                        </div>
+                        <div class="company-detail-item">
+                            <div class="text-sm text-gray-500">Company Reg No</div>
+                            <div class="font-bold">05847543</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map Placeholder -->
+                <div class="map-placeholder h-48">
+                    <div class="text-center">
+                        <i class="fas fa-map-marked-alt text-3xl text-gray-400 mb-2"></i>
+                        <div>Map Location</div>
+                        <div class="text-xs mt-1">Interactive map would be displayed here</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Hours -->
+        <div class="bg-gray-50 rounded-lg p-6 mb-12">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Business Hours</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <h4 class="font-bold text-gray-700 mb-2">Office Hours</h4>
+                    <div class="text-gray-600">
+                        <div>Monday - Friday: 8:00 AM - 6:00 PM GMT</div>
+                        <div>Saturday: 9:00 AM - 1:00 PM GMT</div>
+                        <div>Sunday: Closed</div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-700 mb-2">Emergency Support</h4>
+                    <div class="text-gray-600">
+                        <div>Available for critical orders</div>
+                        <div>Email: sales@aviationspares.com</div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-700 mb-2">Response Time</h4>
+                    <div class="text-gray-600">
+                        <div>General enquiries: Within 24 hours</div>
+                        <div>Urgent enquiries: Within 2 hours</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Departments -->
+        <div class="mb-12">
+            <h3 class="text-xl font-bold text-gray-800 mb-6">Contact the Right Department</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                        <i class="fas fa-shopping-cart text-aviation-blue"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">Sales Department</h4>
+                    <p class="text-gray-600 text-sm mb-4">For product enquiries, pricing, and orders</p>
+                    <div class="text-aviation-blue font-medium">sales@aviationspares.com</div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                        <i class="fas fa-headset text-aviation-blue"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">Customer Support</h4>
+                    <p class="text-gray-600 text-sm mb-4">For order tracking and general support</p>
+                    <div class="text-aviation-blue font-medium">support@aviationspares.com</div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                        <i class="fas fa-file-invoice text-aviation-blue"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">Accounts & Invoicing</h4>
+                    <p class="text-gray-600 text-sm mb-4">For billing and payment enquiries</p>
+                    <div class="text-aviation-blue font-medium">accounts@aviationspares.com</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="hidden fixed inset-0 z-[1000] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full relative">
+            <button
+                id="closeSuccessModal"
+                class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+                aria-label="Close modal"
+            >
+                <i class="fas fa-times text-xl"></i>
+            </button>
+
+            <div class="text-center">
+                <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-2xl text-green-600"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Message Sent!</h2>
+                <p class="text-gray-600 mb-6">
+                    Thank you for contacting Aviation Spares & Repairs. We have received your enquiry and will respond to you as soon as possible.
+                </p>
+                <div class="text-sm text-gray-500 mb-6">
+                    <p>Our typical response time is within 24 hours during business days.</p>
+                </div>
+                <button id="closeSuccessBtn" class="bg-aviation-blue text-white font-bold py-2 px-6 rounded hover:bg-aviation-accent transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+
+            // Change icon
+            const icon = this.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        // Character counter for message textarea
+        const messageTextarea = document.getElementById('message');
+        const charCountSpan = document.getElementById('charCount');
+
+        messageTextarea.addEventListener('input', function() {
+            const remaining = 500 - this.value.length;
+            charCountSpan.textContent = remaining;
+
+            // Change color if getting low
+            if (remaining < 50) {
+                charCountSpan.classList.add('text-red-500');
+            } else if (remaining < 100) {
+                charCountSpan.classList.add('text-yellow-500');
+            } else {
+                charCountSpan.classList.remove('text-red-500', 'text-yellow-500');
+            }
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            // Simple validation
+            if (!data.name || !data.email || !data.message) {
+                alert('Please fill in all required fields (marked with *)');
+                return;
+            }
+
+            // Show success modal
+            document.getElementById('successModal').classList.remove('hidden');
+
+            // Reset form
+            this.reset();
+            charCountSpan.textContent = 500;
+            charCountSpan.classList.remove('text-red-500', 'text-yellow-500');
+        });
+
+        // Close success modal
+        document.getElementById('closeSuccessModal').addEventListener('click', function() {
+            document.getElementById('successModal').classList.add('hidden');
+        });
+
+        document.getElementById('closeSuccessBtn').addEventListener('click', function() {
+            document.getElementById('successModal').classList.add('hidden');
+        });
+
+        // Privacy Widget Click
+        document.getElementById('privacyWidget').addEventListener('click', function() {
+            window.location.href = 'privacy-policy.html';
+        });
+
+        // Check for product parameter in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const product = urlParams.get('product');
+        if (product) {
+            messageTextarea.value = 'I would like to request a quote for: ' + decodeURIComponent(product);
+            messageTextarea.dispatchEvent(new Event('input'));
+        }
+
+
+
+        // Enhance form with validation styling
+        const formInputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
+
+        formInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.classList.add('border-red-300', 'bg-red-50');
+                } else {
+                    this.classList.remove('border-red-300', 'bg-red-50');
+                }
+            });
+
+            input.addEventListener('input', function() {
+                if (this.value.trim()) {
+                    this.classList.remove('border-red-300', 'bg-red-50');
+                }
+            });
+        });
+
+        // Add hover effect to send button
+        const sendButton = document.querySelector('.send-button');
+        sendButton.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-1px)';
+        });
+
+        sendButton.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+
+    </script>
+
+</body>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Quality | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+    <style>
+        * { transition: all 0.3s ease; }
+        body { font-family: 'Roboto', sans-serif; scroll-behavior: smooth; }
+        :root { --aviation-blue: #005eb8; --aviation-accent: #004c97; }
+        .aviation-blue { color: var(--aviation-blue); }
+        .bg-aviation-blue { background-color: var(--aviation-blue); }
+    </style>
+
+    <div class="bg-gray-50 py-3 border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <nav class="flex text-sm">
+                <a href="{% url 'product:home' %}" class="text-aviation-blue hover:underline">Home</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-gray-600">Quality</span>
+            </nav>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-gray-800 mb-6">QUALITY MANAGEMENT</h1>
+
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Our Commitment to Quality</h2>
+            <p class="text-gray-600 mb-6">At Aviation Spares & Repairs, quality is at the heart of everything we do. We maintain the highest standards through rigorous quality management systems and continuous improvement processes.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white border border-gray-200 rounded-lg p-6">
+                <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                    <i class="fas fa-certificate text-2xl text-green-600"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">ISO 9001:2015 Certified</h3>
+                <p class="text-gray-600">Our quality management system is certified to ISO 9001:2015 standards, ensuring consistent quality and customer satisfaction.</p>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-lg p-6">
+                <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                    <i class="fas fa-shield-alt text-2xl text-aviation-blue"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">AS9120B Compliance</h3>
+                <p class="text-gray-600">We maintain AS9120B certification for aerospace quality management systems for stockist distributors.</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-lg p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Quality Processes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="w-12 h-12 rounded-full bg-aviation-blue text-white flex items-center justify-center mx-auto mb-3 text-xl font-bold">1</div>
+                    <h4 class="font-bold text-gray-800 mb-2">Supplier Qualification</h4>
+                    <p class="text-gray-600 text-sm">Rigorous supplier assessment and approval processes</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 rounded-full bg-aviation-blue text-white flex items-center justify-center mx-auto mb-3 text-xl font-bold">2</div>
+                    <h4 class="font-bold text-gray-800 mb-2">Incoming Inspection</h4>
+                    <p class="text-gray-600 text-sm">Comprehensive inspection of all incoming products</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 rounded-full bg-aviation-blue text-white flex items-center justify-center mx-auto mb-3 text-xl font-bold">3</div>
+                    <h4 class="font-bold text-gray-800 mb-2">Documentation Control</h4>
+                    <p class="text-gray-600 text-sm">Complete traceability and documentation management</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Equal Opportunities Policy | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+
+    <style>
+        * { transition: all 0.3s ease; }
+        body { font-family: 'Roboto', sans-serif; scroll-behavior: smooth; }
+        :root { --aviation-blue: #005eb8; --aviation-accent: #004c97; }
+        .aviation-blue { color: var(--aviation-blue); }
+        .bg-aviation-blue { background-color: var(--aviation-blue); }
+    </style>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">EQUAL OPPORTUNITIES POLICY</h1>
+        <div class="prose max-w-none">
+            <h2 class="text-xl font-bold mb-3">Our Commitment</h2>
+            <p class="mb-4">Aviation Spares & Repairs is committed to providing equal opportunities for all employees and job applicants.</p>
+            <h2 class="text-xl font-bold mb-3">Non-Discrimination</h2>
+            <p class="mb-4">We do not discriminate based on race, gender, age, religion, disability, or any other protected characteristic.</p>
+            <h2 class="text-xl font-bold mb-3">Fair Treatment</h2>
+            <p class="mb-4">All employees are treated fairly and with respect in all aspects of employment.</p>
+        </div>
+    </main>
+
+{% endblock %}

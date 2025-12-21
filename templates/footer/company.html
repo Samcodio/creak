@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Company | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+    <style>
+        * { transition: all 0.3s ease; }
+        body { font-family: 'Roboto', sans-serif; scroll-behavior: smooth; }
+        :root { --aviation-blue: #005eb8; --aviation-accent: #004c97; }
+        .aviation-blue { color: var(--aviation-blue); }
+        .bg-aviation-blue { background-color: var(--aviation-blue); }
+    </style>
+    <div class="bg-gray-50 py-3 border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <nav class="flex text-sm">
+                <a href="{% url 'product:home' %}" class="text-aviation-blue hover:underline">Home</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-gray-600">Company</span>
+            </nav>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-gray-800 mb-6">COMPANY INFORMATION</h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">About Aviation Spares & Repairs</h2>
+                <p class="text-gray-600 mb-4">Aviation Spares & Repairs Ltd is a leading supplier of aviation equipment with over 30 years of experience in the industry. We specialize in providing comprehensive solutions for commercial, military, and private aviation sectors.</p>
+                <p class="text-gray-600 mb-6">Our commitment to excellence and customer satisfaction has made us a trusted partner for aviation professionals worldwide.</p>
+
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Company Registration Details</h3>
+                <div class="bg-gray-50 p-4 rounded">
+                    <p><strong>Company Name:</strong> Aviation Spares & Repairs Ltd</p>
+                    <p><strong>Registration Number:</strong> 05347543</p>
+                    <p><strong>VAT Number:</strong> 857 7031 07</p>
+                    <p><strong>CAGE Code:</strong> KCV81</p>
+                    <p><strong>DUNS Number:</strong> 345372606</p>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Our Mission</h2>
+                <p class="text-gray-600 mb-6">To provide reliable, cost-effective aviation equipment solutions while maintaining the highest standards of quality and customer service.</p>
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Our Vision</h2>
+                <p class="text-gray-600 mb-6">To be the global leader in aviation supply chain management, recognized for innovation, reliability, and excellence.</p>
+
+                <div class="bg-aviation-blue text-white p-6 rounded">
+                    <h3 class="text-xl font-bold mb-3">Contact Information</h3>
+                    <p>Unit 6 Westlink, Romsey, Hampshire, SO51 7AA</p>
+                    <p>Email: sales@aviationspares.com</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

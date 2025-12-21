@@ -1,0 +1,27 @@
+{% load static %}
+{% block title %}
+<title>Health and Safety Policy | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+
+    <style>
+        * { transition: all 0.3s ease; }
+        body { font-family: 'Roboto', sans-serif; scroll-behavior: smooth; }
+        :root { --aviation-blue: #005eb8; --aviation-accent: #004c97; }
+        .aviation-blue { color: var(--aviation-blue); }
+        .bg-aviation-blue { background-color: var(--aviation-blue); }
+    </style>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">HEALTH AND SAFETY POLICY</h1>
+        <div class="prose max-w-none">
+            <h2 class="text-xl font-bold mb-3">Safety First</h2>
+            <p class="mb-4">The health and safety of our employees, customers, and visitors is our top priority.</p>
+            <h2 class="text-xl font-bold mb-3">Risk Management</h2>
+            <p class="mb-4">We identify, assess, and control workplace risks to prevent accidents and injuries.</p>
+            <h2 class="text-xl font-bold mb-3">Training</h2>
+            <p class="mb-4">All employees receive appropriate health and safety training for their roles.</p>
+        </div>
+    </main>
+
+{% endblock %}

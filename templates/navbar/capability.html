@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Our Capabilities | Global Aviation Equipment Supplier</title>
+{% endblock %}
+{% block content %}
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --aviation-blue: #005eb8;
+            --aviation-accent: #004c97;
+        }
+
+        .aviation-blue { color: var(--aviation-blue); }
+        .bg-aviation-blue { background-color: var(--aviation-blue); }
+
+        .capability-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .capability-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--aviation-blue);
+        }
+    </style>
+
+    <div class="bg-gray-50 py-3 border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <nav class="flex text-sm">
+                <a href="{% url 'product:home' %}" class="text-aviation-blue hover:underline">Home</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-gray-600">Capabilities</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">OUR CAPABILITIES</h1>
+            <p class="text-gray-600 max-w-3xl">With over 30 years of experience in aviation supply chain management, we offer comprehensive capabilities to meet all your aviation equipment needs.</p>
+        </div>
+
+        <!-- Core Capabilities -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Core Capabilities</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="capability-card bg-white rounded-lg p-6">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                        <i class="fas fa-cogs text-2xl text-aviation-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Supply Chain Management</h3>
+                    <p class="text-gray-600">End-to-end supply chain solutions with global sourcing capabilities and optimized logistics for timely delivery.</p>
+                </div>
+
+                <div class="capability-card bg-white rounded-lg p-6">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                        <i class="fas fa-warehouse text-2xl text-aviation-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Inventory Management</h3>
+                    <p class="text-gray-600">Advanced inventory systems ensuring optimal stock levels and rapid fulfillment of customer requirements.</p>
+                </div>
+
+                <div class="capability-card bg-white rounded-lg p-6">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                        <i class="fas fa-certificate text-2xl text-aviation-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Quality Assurance</h3>
+                    <p class="text-gray-600">ISO 9001:2015 certified quality management system ensuring the highest standards in all operations.</p>
+                </div>
+
+                <div class="capability-card bg-white rounded-lg p-6">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                        <i class="fas fa-globe text-2xl text-aviation-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Global Distribution</h3>
+                    <p class="text-gray-600">Worldwide distribution network with offices in UK, USA, and UAE serving customers across all continents.</p>
+                </div>
+
+                <div class="capability-card bg-white rounded-lg p-6">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                        <i class="fas fa-tools text-2xl text-aviation-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Technical Support</h3>
+                    <p class="text-gray-600">Expert technical support and consultation services for product selection and application guidance.</p>
+                </div>
+
+                <div class="capability-card bg-white rounded-lg p-6">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                        <i class="fas fa-handshake text-2xl text-aviation-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Custom Solutions</h3>
+                    <p class="text-gray-600">Tailored solutions for unique requirements including custom manufacturing and specialized sourcing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Areas -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Service Areas</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Commercial Aviation</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-aviation-blue mt-1 mr-3"></i>
+                            <span>Airlines and aircraft operators</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-aviation-blue mt-1 mr-3"></i>
+                            <span>MRO (Maintenance, Repair, Overhaul) facilities</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-aviation-blue mt-1 mr-3"></i>
+                            <span>FBOs (Fixed Base Operators)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-aviation-blue mt-1 mr-3"></i>
+                            <span>Aircraft leasing companies</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-aviation-blue mt-1 mr-3"></i>
+                            <span>Ground handling service providers</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Military & Defense</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-aviation-blue mt-1 mr-3"></i>
+                            <span>Military air forces worldwide</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-aviation-blue mt-1 mr-3"></i>
+                            <span>Defense contractors</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-aviation-blue mt-1 mr-3"></i>
+                            <span>Government agencies</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-aviation-blue mt-1 mr-3"></i>
+                            <span>Military training facilities</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-aviation-blue mt-1 mr-3"></i>
+                            <span>Special operations units</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Overview -->
+        <section class="bg-gray-50 rounded-lg p-8 mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Our Process</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full bg-aviation-blue text-white flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div>
+                    <h4 class="font-bold text-gray-800 mb-2">Requirement Analysis</h4>
+                    <p class="text-gray-600 text-sm">Understanding your specific needs and technical requirements</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full bg-aviation-blue text-white flex items-center justify-center mx-auto mb-4 text-2xl font-bold">2</div>
+                    <h4 class="font-bold text-gray-800 mb-2">Sourcing & Procurement</h4>
+                    <p class="text-gray-600 text-sm">Leveraging our global network to source the best solutions</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full bg-aviation-blue text-white flex items-center justify-center mx-auto mb-4 text-2xl font-bold">3</div>
+                    <h4 class="font-bold text-gray-800 mb-2">Quality Control</h4>
+                    <p class="text-gray-600 text-sm">Rigorous testing and certification processes</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full bg-aviation-blue text-white flex items-center justify-center mx-auto mb-4 text-2xl font-bold">4</div>
+                    <h4 class="font-bold text-gray-800 mb-2">Delivery & Support</h4>
+                    <p class="text-gray-600 text-sm">Timely delivery with ongoing aftermarket support</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Certifications & Standards</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white border border-gray-200 rounded-lg p-6 text-center">
+                    <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-award text-3xl text-green-600"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">ISO 9001:2015</h4>
+                    <p class="text-gray-600 text-sm">Quality Management System certification ensuring consistent quality standards</p>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-6 text-center">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-3xl text-aviation-blue"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">AS9120B</h4>
+                    <p class="text-gray-600 text-sm">Aerospace quality management system for stockist distributors</p>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-6 text-center">
+                    <div class="w-20 h-20 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check-circle text-3xl text-red-600"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">CAGE Code: KCV81</h4>
+                    <p class="text-gray-600 text-sm">Commercial and Government Entity code for defense contracting</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section class="bg-aviation-blue text-white rounded-lg p-8 text-center">
+            <h2 class="text-3xl font-bold mb-4">Ready to Experience Our Capabilities?</h2>
+            <p class="text-white/90 mb-6 max-w-2xl mx-auto">Contact our team to discuss how our capabilities can support your aviation equipment needs and operational requirements.</p>
+            <a href="contact.html" class="inline-block bg-white text-black font-bold py-3 px-8 rounded hover:bg-gray-100 transition-colors">GET IN TOUCH</a>
+        </section>
+    </main>
+
+
+{% endblock %}

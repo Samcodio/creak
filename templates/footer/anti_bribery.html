@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Anti-Bribery Policy | Global Aviation Equipment Supplier</title>
+{% endblock %}
+{% block content %}
+
+    <style>
+        * { transition: all 0.3s ease; }
+        body { font-family: 'Roboto', sans-serif; }
+        :root { --aviation-blue: #005eb8; }
+        .aviation-blue { color: var(--aviation-blue); }
+    </style>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">ANTI-BRIBERY POLICY</h1>
+        <div class="prose max-w-none">
+            <div class="bg-red-50 p-6 rounded-lg mb-8">
+                <p class="text-gray-700"><strong>Zero Tolerance:</strong> Aviation Spares & Repairs Ltd maintains a zero-tolerance policy towards bribery and corruption in compliance with the UK Bribery Act 2010 and international anti-corruption laws.</p>
+            </div>
+
+            <h2 class="text-xl font-bold mb-3">1. Policy Statement</h2>
+            <p class="mb-4">We are committed to conducting business with the highest standards of integrity. This policy applies to all employees, directors, agents, and third parties acting on our behalf.</p>
+
+            <h2 class="text-xl font-bold mb-3">2. Prohibited Activities</h2>
+            <p class="mb-4">The following are strictly prohibited:</p>
+            <ul class="list-disc pl-6 mb-4 text-gray-600">
+                <li>Offering, giving, requesting, or accepting bribes</li>
+                <li>Facilitation payments to expedite routine services</li>
+                <li>Kickbacks or secret commissions</li>
+                <li>Inappropriate gifts or hospitality</li>
+                <li>Political contributions for business advantage</li>
+            </ul>
+
+            <h2 class="text-xl font-bold mb-3">3. Due Diligence</h2>
+            <p class="mb-4">We conduct appropriate due diligence on business partners, agents, and suppliers to ensure they share our commitment to ethical business practices.</p>
+
+            <h2 class="text-xl font-bold mb-3">4. Training and Awareness</h2>
+            <p class="mb-4">All personnel receive regular training on anti-bribery requirements and are expected to understand and comply with this policy.</p>
+
+            <h2 class="text-xl font-bold mb-3">5. Reporting and Investigation</h2>
+            <p class="mb-4">Suspected violations must be reported immediately to management or via our confidential reporting system. All reports will be investigated thoroughly and appropriate action taken.</p>
+
+            <h2 class="text-xl font-bold mb-3">6. Consequences</h2>
+            <p class="mb-4">Violations may result in disciplinary action including termination, contract cancellation, and referral to law enforcement authorities.</p>
+        </div>
+    </main>
+
+{% endblock %}

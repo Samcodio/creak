@@ -1,0 +1,27 @@
+{% load static %}
+{% block title %}
+<title>Obsolescence Management Policy | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+
+    <style>
+        * { transition: all 0.3s ease; }
+        body { font-family: 'Roboto', sans-serif; scroll-behavior: smooth; }
+        :root { --aviation-blue: #005eb8; --aviation-accent: #004c97; }
+        .aviation-blue { color: var(--aviation-blue); }
+        .bg-aviation-blue { background-color: var(--aviation-blue); }
+    </style>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">OBSOLESCENCE MANAGEMENT POLICY</h1>
+        <div class="prose max-w-none">
+            <h2 class="text-xl font-bold mb-3">Proactive Management</h2>
+            <p class="mb-4">We proactively manage product obsolescence to ensure continued support for our customers.</p>
+            <h2 class="text-xl font-bold mb-3">Alternative Solutions</h2>
+            <p class="mb-4">We identify and qualify alternative products when original items become obsolete.</p>
+            <h2 class="text-xl font-bold mb-3">Customer Support</h2>
+            <p class="mb-4">We work closely with customers to develop obsolescence mitigation strategies.</p>
+        </div>
+    </main>
+
+{% endblock %}

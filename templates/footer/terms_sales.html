@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Terms & Conditions Of Sales | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+
+    <style>
+        * { transition: all 0.3s ease; }
+        body { font-family: 'Roboto', sans-serif; }
+        :root { --aviation-blue: #005eb8; }
+        .aviation-blue { color: var(--aviation-blue); }
+    </style>
+
+    <div class="bg-gray-50 py-3 border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <nav class="flex text-sm">
+                <a href="{% url 'product:home' %}" class="text-aviation-blue hover:underline">Home</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-gray-600">Terms & Conditions of Sales</span>
+            </nav>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">TERMS & CONDITIONS OF SALES</h1>
+        <div class="prose max-w-none">
+            <div class="bg-blue-50 p-6 rounded-lg mb-8">
+                <p class="text-gray-700">These terms and conditions of sale apply to all sales of goods and services by Aviation Spares & Repairs Ltd to customers and form part of the contract of sale.</p>
+            </div>
+
+            <h2 class="text-xl font-bold mb-3">1. Contract Formation</h2>
+            <p class="mb-4">Quotations are valid for 30 days. Orders are accepted subject to these terms and our written acknowledgment. No variation is valid unless agreed in writing by a director.</p>
+
+            <h2 class="text-xl font-bold mb-3">2. Price and Payment</h2>
+            <p class="mb-4">Prices are exclusive of VAT and delivery charges. Payment terms are strictly 30 days net from invoice date. We reserve the right to charge interest at 8% above Bank of England base rate on overdue amounts.</p>
+
+            <h2 class="text-xl font-bold mb-3">3. Delivery and Risk</h2>
+            <p class="mb-4">Delivery dates are estimates only. Risk passes on delivery or collection. We are not liable for delays beyond our reasonable control including supplier delays or force majeure events.</p>
+
+            <h2 class="text-xl font-bold mb-3">4. Quality and Warranties</h2>
+            <p class="mb-4">Goods are warranted to be free from defects for 12 months from delivery. Our liability is limited to repair, replacement, or refund at our discretion. We exclude all other warranties and conditions.</p>
+
+            <h2 class="text-xl font-bold mb-3">5. Returns and Cancellation</h2>
+            <p class="mb-4">Returns require prior written authorization. Goods must be unused, in original packaging, and returned within 30 days. Restocking charges may apply. Custom or special order items are non-returnable.</p>
+
+            <h2 class="text-xl font-bold mb-3">6. Limitation of Liability</h2>
+            <p class="mb-4">Our total liability is limited to the contract value. We exclude liability for consequential, indirect, or special damages. Nothing excludes liability for death, personal injury, or fraud.</p>
+
+            <h2 class="text-xl font-bold mb-3">7. Retention of Title</h2>
+            <p class="mb-4">Title to goods remains with us until full payment is received. Unpaid goods may be repossessed. Risk passes on delivery regardless of title retention.</p>
+        </div>
+    </main>
+
+{% endblock %}

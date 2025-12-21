@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Terms & Conditions Of Purchase | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+
+    <style>
+        * { transition: all 0.3s ease; }
+        body { font-family: 'Roboto', sans-serif; }
+        :root { --aviation-blue: #005eb8; }
+        .aviation-blue { color: var(--aviation-blue); }
+    </style>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">TERMS & CONDITIONS OF PURCHASE</h1>
+        <div class="prose max-w-none">
+            <div class="bg-blue-50 p-6 rounded-lg mb-8">
+                <p class="text-gray-700">These terms and conditions govern all purchases made by Aviation Spares & Repairs Ltd from suppliers and form part of our purchase contracts.</p>
+            </div>
+
+            <h2 class="text-xl font-bold mb-3">1. Supplier Qualification</h2>
+            <p class="mb-4">Suppliers must be approved through our qualification process, maintain appropriate certifications (AS9120, ISO 9001), and comply with aviation industry standards including EASA, FAA, and CAA requirements.</p>
+
+            <h2 class="text-xl font-bold mb-3">2. Purchase Orders and Acceptance</h2>
+            <p class="mb-4">All purchases require a valid purchase order. Supplier acceptance creates a binding contract. No variations are permitted without written authorization from our procurement department.</p>
+
+            <h2 class="text-xl font-bold mb-3">3. Quality and Compliance</h2>
+            <p class="mb-4">All goods must comply with specified standards, include proper certification (8130-3, EASA Form 1), and meet airworthiness requirements. Suppliers must maintain full traceability documentation.</p>
+
+            <h2 class="text-xl font-bold mb-3">4. Delivery and Performance</h2>
+            <p class="mb-4">Time is of the essence. Suppliers must notify us immediately of any potential delays. Late delivery may result in additional costs being charged to the supplier.</p>
+
+            <h2 class="text-xl font-bold mb-3">5. Inspection and Rejection</h2>
+            <p class="mb-4">We reserve the right to inspect all goods upon receipt. Non-conforming items will be rejected at supplier's cost. Suppliers must provide immediate replacement or credit.</p>
+
+            <h2 class="text-xl font-bold mb-3">6. Warranties and Indemnification</h2>
+            <p class="mb-4">Suppliers warrant goods are free from defects, fit for purpose, and comply with all specifications. Suppliers indemnify us against claims arising from defective or non-compliant goods.</p>
+        </div>
+    </main>
+    {% endblock %}

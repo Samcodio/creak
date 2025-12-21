@@ -1,0 +1,434 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Atomic aviation spare | Global Aviation Equipment Supplier</title>
+{% endblock %}
+{% block content %}
+    <style>
+
+        * {
+            transition: all 0.3s ease;
+        }
+
+        body {
+            scroll-behavior: smooth;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .partner-logo {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        button, .btn, a {
+            transition: all 0.2s ease;
+        }
+
+        button:hover, .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .product-image {
+            transition: transform 0.5s ease;
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .partners-slider {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .partners-track {
+            display: flex;
+            animation: scroll 20s linear infinite;
+            width: calc(200% + 20px);
+        }
+
+        .partner-item {
+            flex: 0 0 150px;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .partner-logo {
+            max-width: 160px;
+            max-height: 80px;
+            object-fit: contain;
+            opacity: 0.9;
+        }
+
+        .partner-logo:hover {
+            opacity: 1;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+    <section class="relative w-full h-[400px] md:h-[500px] bg-cover bg-center" style="background-image: url('{% static 'assets/images/hero/banner-large-opt.jpg' %}');">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="container mx-auto h-full px-4 flex items-center relative z-10">
+            <div class="bg-white/95 p-4 md:p-8 max-w-lg shadow-lg mx-4 md:mx-0">
+                <h1 class="text-2xl md:text-3xl font-bold text-aviation-blue mb-2 leading-tight">
+                    MARKET LEADER IN THE SUPPLY OF AVIATION EQUIPMENT
+                </h1>
+                <p class="text-sm font-bold text-gray-600 mb-6 tracking-wide">
+                    ATOMICAVIATIONSPARE
+                </p>
+                <a href="pages/navbar/about.html" class="inline-block bg-aviation-blue text-white text-xs font-bold py-3 px-6 hover:bg-aviation-accent transition-colors uppercase">
+                    FIND OUT MORE
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container mx-auto px-4 py-12">
+        <div class="max-w-5xl mx-auto text-center">
+            <p class="text-sm text-gray-700 leading-relaxed">
+                <span class="font-bold">Atomicaviationspare</span> has been in the aviation supply chain management business for over 30 years and as a result, have a supply network that is second to none. This means that we can provide you with what you need quickly, reliably and at a competitive price, allowing you more time to concentrate on your core business and less time managing suppliers.
+            </p>
+            <p class="text-sm text-gray-700 leading-relaxed mt-4">
+                We are specialists in both military and commercial aviation with extensive experience in the supply of aircraft spares, ground support equipment, aircraft tooling solutions and personal protective equipment. With our headquarters based in the UK and offices in the USA and UAE, we can support a global customer base to deliver a fast response and prompt delivery worldwide.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-gray-50 py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Our Categories</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+
+                {% for cat in category %}
+                <a href="{% url 'product:category' cat.id %}" class="category-card bg-white shadow-sm hover:shadow-md rounded overflow-hidden">
+                    <div class="overflow-hidden h-40">
+                        <img src="{{cat.category_pic}}"
+                             class="w-full h-full object-cover product-image">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">{{cat.category_name|upper}}</h3>
+                        <p class="text-[10px] font-bold text-gray-500 uppercase hover:text-aviation-blue tracking-wide">
+                            FIND OUT MORE
+                        </p>
+                    </div>
+                </a>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="container mx-auto px-4 py-12">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Our Products</h2>
+        <div class="w-16 h-0.5 bg-gray-300 mx-auto mb-8"></div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-2 md:gap-x-4 gap-y-8 md:gap-y-12">
+
+            {% for item in products %}
+            <a href="{% url 'product:product_detail' item.id %}" class="product-card flex flex-col items-center text-center group cursor-pointer">
+                <div class="w-full bg-gray-50 p-6 mb-4 hover:bg-white hover:shadow-lg transition-all border border-transparent hover:border-gray-100 flex items-center justify-center h-40 product-image-container">
+                    <img src="{{item.product_pic}}"
+                         alt="Aircraft Fluid Management"
+                         class="max-h-full max-w-full mix-blend-multiply product-image">
+                </div>
+                <span class="text-xs font-medium text-gray-700 group-hover:text-aviation-blue transition-colors px-2">
+                    {{item.product_name}}
+                </span>
+            </a>
+            {% endfor %}
+
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="{% url 'product:products' %}" class="inline-block bg-aviation-blue text-white font-bold py-3 px-8 hover:bg-aviation-accent transition-colors uppercase text-sm">
+                VIEW ALL PRODUCTS
+            </a>
+        </div>
+    </section>
+
+    <section class="border-t border-gray-200 py-16 overflow-hidden">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-xl font-bold text-gray-700 mb-12">Our Partners</h2>
+            <div class="partners-slider">
+                <div class="partners-track">
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/ejendals.jpg' %}" alt="Ejendals" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/Honeywell.jpg' %}" alt="Honeywell" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/Polaris.jpg' %}" alt="Polaris" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/aero-homepage.jpg' %}" alt="Aero Specialties" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/homepage-eagle.jpg' %}" alt="Eagle" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/homepage-pci.jpg' %}" alt="PCI" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/Redbox.jpg' %}" alt="Redbox" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/homepage-mitutoyo.jpg' %}" alt="Mitutoyo" class="partner-logo">
+                    </div>
+
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/ejendals.jpg' %}" alt="Ejendals" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/Honeywell.jpg' %}" alt="Honeywell" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/Polaris.jpg' %}" alt="Polaris" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/aero-homepage.jpg' %}" alt="Aero Specialties" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/homepage-eagle.jpg' %}" alt="Eagle" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/homepage-pci.jpg' %}" alt="PCI" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/Redbox.jpg' %}" alt="Redbox" class="partner-logo">
+                    </div>
+                    <div class="partner-item">
+                        <img src="{% static 'assets/images/our partners/homepage-mitutoyo.jpg' %}" alt="Mitutoyo" class="partner-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <div id="welcomePopup" class="hidden fixed inset-0 z-[1000] flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-300 p-4">
+        <div class="bg-white rounded shadow-2xl p-8 max-w-md w-full relative animate-fadeIn">
+            <button
+                id="closePopup"
+                class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+                aria-label="Close welcome message"
+            >
+                <i class="fas fa-times text-xl"></i>
+            </button>
+
+            <div class="text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 mb-6 text-aviation-blue">
+                    <i class="fas fa-plane text-2xl"></i>
+                </div>
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Welcome to Aviation Spares</h2>
+                <p class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6">Your Global Aviation Partner</p>
+
+                <p class="text-gray-600 mb-8 leading-relaxed text-sm">
+                    We are delighted to have you here. Browse our extensive inventory of aircraft spares, tooling solutions, and ground support equipment trusted by leaders in the industry.
+                </p>
+
+                <button
+                    id="enterSite"
+                    class="w-full bg-aviation-blue hover:bg-aviation-accent text-white font-bold py-3 px-6 rounded shadow-md transition-colors uppercase tracking-wide text-sm"
+                >
+                    Enter Site
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+
+    <script>
+        // Mobile Menu hamburger
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('open');
+
+            // Change icon
+            const icon = this.querySelector('i');
+            if (mobileMenu.classList.contains('open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Welcome Popup
+        document.addEventListener('DOMContentLoaded', function() {
+            const hasVisited = localStorage.getItem('hasVisitedAviationSpares');
+            const welcomePopup = document.getElementById('welcomePopup');
+
+            if (!hasVisited) {
+                setTimeout(() => {
+                    welcomePopup.classList.remove('hidden');
+                }, 1000);
+            }
+
+            // Close popup
+            document.getElementById('closePopup').addEventListener('click', function() {
+                welcomePopup.classList.add('hidden');
+                localStorage.setItem('hasVisitedAviationSpares', 'true');
+            });
+
+            document.getElementById('enterSite').addEventListener('click', function() {
+                welcomePopup.classList.add('hidden');
+                localStorage.setItem('hasVisitedAviationSpares', 'true');
+            });
+        });
+
+        // Search Functions
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput').value.trim();
+            const searchResults = document.getElementById('searchResults');
+            const resultContent = document.getElementById('searchResultContent');
+
+            if (!searchInput) {
+                searchResults.classList.add('hidden');
+                return;
+            }
+
+            // search
+            const searchData = {
+                'altimeter': 'Found: <strong>Altimeter</strong> - Precision aircraft altimeter £3,200',
+                'airspeed': 'Found: <strong>Airspeed Indicator</strong> - Aircraft airspeed measurement £2,450',
+                'gps': 'Found: <strong>GPS Receiver</strong> - WAAS-enabled GPS navigation £8,500',
+                'transponder': 'Found: <strong>Transponder</strong> - Mode S transponder with ADS-B £4,200',
+                'gyro': 'Found: <strong>Directional Gyro</strong> - Directional gyroscope compass £3,750',
+                'brake': 'Found: <strong>Brake Assembly</strong> - Aircraft wheel brake system £1,850',
+                'tire': 'Found: <strong>Aviation Tires</strong> - Goodyear & Michelin aircraft tires from £1,200',
+                'propeller': 'Found: <strong>Propeller Components</strong> - McCauley propeller systems from £4,500',
+                'engine': 'Found: <strong>Engine Parts</strong> - CFM56, V2500 components - Quote',
+                'hydraulic': 'Found: <strong>Hydraulic Components</strong> - Pumps, actuators, valves from £2,750',
+                'jack': 'Found: <strong>Aircraft Jacks</strong> - Axle jacks and lifting equipment',
+                'compressor': 'Found: <strong>Compressors</strong> - MC20 Portable Compressor systems',
+                'towbar': 'Found: <strong>Aircraft Towbars</strong> - Towbars & heads for ground handling',
+                'ppe': 'Found: <strong>COVID-19 PPE</strong> - Personal protective equipment',
+                'gse': 'Found: <strong>Ground Support Equipment</strong> - Complete GSE solutions',
+                'tool': 'Found: <strong>Tooling Solutions</strong> - Aircraft maintenance tools',
+                'valve': 'Found: <strong>Aircraft Valve</strong> - Hydraulic control valves',
+                'wheel': 'Found: <strong>Aircraft Wheels</strong> - Landing gear wheel assemblies',
+                'fuel': 'Found: <strong>Fuel System</strong> - Fuel pumps, filters, and components',
+                'electrical': 'Found: <strong>Electrical Components</strong> - Generators, relays, converters'
+            };
+
+            let result = '';
+            let found = false;
+
+            for (const [key, value] of Object.entries(searchData)) {
+                if (searchInput.toLowerCase().includes(key)) {
+                    result = value + '<br><br><a href="pages/navbar/product.html" class="text-aviation-blue hover:underline text-xs">View all products →</a>';
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                result = `No matches for "${searchInput}". Try: altimeter, airspeed, GPS, transponder, brake, tire, propeller, engine, hydraulic, jack, compressor.`;
+            }
+
+            resultContent.innerHTML = result;
+            searchResults.classList.remove('hidden');
+        }
+
+        document.getElementById('searchButton').addEventListener('click', performSearch);
+
+        //key support
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // Close search results
+        document.addEventListener('click', function(event) {
+            const searchResults = document.getElementById('searchResults');
+            const searchContainer = document.querySelector('.relative.flex.items-center');
+
+            if (!searchContainer.contains(event.target)) {
+                searchResults.classList.add('hidden');
+            }
+        });
+
+        // a-z sticky
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.sticky-header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+
+        // scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Smooth scroll
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Cart functions
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const totalItems = Array.isArray(cart) ? cart.reduce((sum, item) => sum + (item.quantity || 0), 0) : 0;
+            const cartCount = document.getElementById('cart-count');
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+        });
+    </script>
+
+</body>
+{% endblock %}
+</html>

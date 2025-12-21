@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Environmental Policy | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+
+    <style>
+        * { transition: all 0.3s ease; }
+        body { font-family: 'Roboto', sans-serif; scroll-behavior: smooth; }
+        :root { --aviation-blue: #005eb8; --aviation-accent: #004c97; }
+        .aviation-blue { color: var(--aviation-blue); }
+        .bg-aviation-blue { background-color: var(--aviation-blue); }
+    </style>
+
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">ENVIRONMENTAL POLICY</h1>
+        <div class="prose max-w-none">
+            <div class="bg-green-50 p-6 rounded-lg mb-8">
+                <p class="text-gray-700">Aviation Spares & Repairs Ltd is committed to environmental stewardship and sustainable business practices in compliance with ISO 14001 principles and UK environmental legislation.</p>
+            </div>
+
+            <h2 class="text-xl font-bold mb-3">1. Environmental Commitment</h2>
+            <p class="mb-4">We recognize our responsibility to minimize environmental impact while supporting the aviation industry's sustainability goals and contributing to carbon reduction initiatives.</p>
+
+            <h2 class="text-xl font-bold mb-3">2. Key Objectives</h2>
+            <ul class="list-disc pl-6 mb-4 text-gray-600">
+                <li>Reduce energy consumption and carbon emissions</li>
+                <li>Minimize waste generation and maximize recycling</li>
+                <li>Promote sustainable supply chain practices</li>
+                <li>Comply with all environmental regulations</li>
+                <li>Continuously improve environmental performance</li>
+            </ul>
+
+            <h2 class="text-xl font-bold mb-3">3. Implementation</h2>
+            <p class="mb-4">We implement environmental management systems, conduct regular assessments, and set measurable targets for improvement. All employees are trained on environmental responsibilities.</p>
+
+            <h2 class="text-xl font-bold mb-3">4. Supplier Requirements</h2>
+            <p class="mb-4">We work with suppliers who demonstrate environmental responsibility and encourage adoption of sustainable practices throughout our supply chain.</p>
+
+            <h2 class="text-xl font-bold mb-3">5. Monitoring and Review</h2>
+            <p class="mb-4">Environmental performance is monitored regularly, with annual reviews to assess progress and identify improvement opportunities.</p>
+        </div>
+    </main>
+
+    {% endblock %}

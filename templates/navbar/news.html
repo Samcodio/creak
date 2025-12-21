@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Latest News | Aviation Spares & Repairs</title>
+{% endblock %}
+{% block content %}
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --aviation-blue: #005eb8;
+            --aviation-accent: #004c97;
+        }
+
+        .aviation-blue { color: var(--aviation-blue); }
+        .bg-aviation-blue { background-color: var(--aviation-blue); }
+
+        .news-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--aviation-blue);
+        }
+
+        .news-image {
+            transition: transform 0.5s ease;
+        }
+
+        .news-card:hover .news-image {
+            transform: scale(1.05);
+        }
+    </style>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-50 py-3 border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <nav class="flex text-sm">
+                <a href="{% url 'product:home' %}" class="text-aviation-blue hover:underline">Home</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-gray-600">Latest News</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">LATEST NEWS</h1>
+            <p class="text-gray-600 max-w-3xl">Stay updated with the latest developments in aviation industry, new product launches, and company announcements from Aviation Spares & Repairs.</p>
+        </div>
+
+        <!-- Featured News -->
+        <section class="mb-16">
+            <div class="bg-aviation-blue text-white rounded-lg p-8 mb-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <span class="bg-white/20 text-white px-3 py-1 rounded text-sm font-bold mb-4 inline-block">FEATURED</span>
+                        <h2 class="text-3xl font-bold mb-4">Aviation Spares & Repairs Expands Global Operations</h2>
+                        <p class="text-white/90 mb-6">We are pleased to announce the expansion of our operations with new partnerships and enhanced supply chain capabilities to better serve our global customer base.</p>
+                        <a  class="inline-block bg-white text-black font-bold py-3 px-6 rounded hover:bg-gray-100 transition-colors">READ MORE</a>
+                    </div>
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Aviation Operations" class="w-full h-64 object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Grid -->
+        <section class="mb-16">
+            <h3 class="text-2xl font-bold text-gray-800 mb-8">Recent Updates</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- News Item 1 -->
+                <article class="news-card bg-white rounded-lg overflow-hidden">
+                    <div class="overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="New Product Launch" class="news-image w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-100 text-aviation-blue px-2 py-1 rounded text-xs font-bold">PRODUCT LAUNCH</span>
+                            <span class="text-gray-500 text-sm ml-auto">March 15, 2025</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">New Ground Support Equipment Range</h4>
+                        <p class="text-gray-600 text-sm mb-4">Introducing our latest collection of advanced ground support equipment designed for enhanced efficiency and safety in airport operations.</p>
+                        <a  class="text-aviation-blue font-bold text-sm hover:underline">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- News Item 2 -->
+                <article class="news-card bg-white rounded-lg overflow-hidden">
+                    <div class="overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Industry Partnership" class="news-image w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">PARTNERSHIP</span>
+                            <span class="text-gray-500 text-sm ml-auto">March 10, 2025</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Strategic Partnership with Leading Manufacturer</h4>
+                        <p class="text-gray-600 text-sm mb-4">We've formed a strategic alliance with a major aviation equipment manufacturer to expand our product offerings and improve delivery times.</p>
+                        <a  class="text-aviation-blue font-bold text-sm hover:underline">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- News Item 3 -->
+                <article class="news-card bg-white rounded-lg overflow-hidden">
+                    <div class="overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Industry Award" class="news-image w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs font-bold">AWARD</span>
+                            <span class="text-gray-500 text-sm ml-auto">March 5, 2025</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Excellence in Aviation Supply Chain Award</h4>
+                        <p class="text-gray-600 text-sm mb-4">Aviation Spares & Repairs has been recognized for outstanding performance in aviation supply chain management and customer service.</p>
+                        <a  class="text-aviation-blue font-bold text-sm hover:underline">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- News Item 4 -->
+                <article class="news-card bg-white rounded-lg overflow-hidden">
+                    <div class="overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Technology Update" class="news-image w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-bold">TECHNOLOGY</span>
+                            <span class="text-gray-500 text-sm ml-auto">February 28, 2025</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Digital Inventory Management System Launch</h4>
+                        <p class="text-gray-600 text-sm mb-4">Our new digital platform provides real-time inventory tracking and automated ordering capabilities for enhanced customer experience.</p>
+                        <a  class="text-aviation-blue font-bold text-sm hover:underline">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- News Item 5 -->
+                <article class="news-card bg-white rounded-lg overflow-hidden">
+                    <div class="overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Training Program" class="news-image w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-bold">TRAINING</span>
+                            <span class="text-gray-500 text-sm ml-auto">February 20, 2025</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Advanced Safety Training Program</h4>
+                        <p class="text-gray-600 text-sm mb-4">Launch of comprehensive safety training program for aviation personnel, covering latest industry standards and best practices.</p>
+                        <a  class="text-aviation-blue font-bold text-sm hover:underline">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- News Item 6 -->
+                <article class="news-card bg-white rounded-lg overflow-hidden">
+                    <div class="overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sustainability Initiative" class="news-image w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">SUSTAINABILITY</span>
+                            <span class="text-gray-500 text-sm ml-auto">February 15, 2025</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Green Aviation Initiative</h4>
+                        <p class="text-gray-600 text-sm mb-4">Our commitment to environmental sustainability through eco-friendly packaging and carbon-neutral shipping options.</p>
+                        <a  class="text-aviation-blue font-bold text-sm hover:underline">Read More →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+{% endblock %}
