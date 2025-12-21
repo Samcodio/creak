@@ -28,6 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://creak.onrender.com",
+    "http://creak.onrender.com",
+]
 
 # Application definition
 
