@@ -4,6 +4,11 @@ from .models import *
 
 # Create your views here.
 
+def base(request):
+    context = {}
+    return render(request, 'base.html', context)
+
+
 def home(request):
     category = Category.objects.all()
     products = Product.objects.all()[:12]
