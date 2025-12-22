@@ -93,6 +93,57 @@
     }
 }
 
+/* =========================
+   MOBILE MENU FIXES - FIXED VERSION
+========================= */
+#mobileMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background-color: white;
+    border-top: 1px solid #e5e7eb;
+    display: none; /* Hidden by default */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#mobileMenu.show {
+    display: block !important;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ensure mobile menu links are visible */
+#mobileMenu a {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #374151; /* gray-700 */
+    font-weight: bold;
+    font-size: 14px;
+    border-bottom: 1px solid #f3f4f6; /* gray-100 */
+}
+
+#mobileMenu a:hover {
+    color: #1e40af; /* aviation-blue */
+    background-color: #f9fafb; /* gray-50 */
+}
+
+/* Remove last border */
+#mobileMenu a:last-child {
+    border-bottom: none;
+}
+
+/* Make sure the header has relative positioning for absolute dropdown */
+.sticky-header {
+    position: relative;
+}
     </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -174,7 +225,7 @@
         </div>
 
         <!-- Mobile Navigation -->
-        <div id="mobileMenu" class="mobile-menu lg:hidden bg-white border-t border-gray-100">
+        <div id="mobileMenu" class="lg:hidden">
             <nav class="flex flex-col p-4 space-y-2">
                 <a href="{% url 'product:home' %}" class="block text-sm font-bold text-gray-700 hover:text-aviation-blue py-2">HOME</a>
                 <a href="{% url 'product:products' %}" class="block text-sm font-bold text-gray-700 hover:text-aviation-blue py-2">PRODUCTS</a>
@@ -269,26 +320,77 @@
             </div>
         </div>
     </footer>
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const toasts = document.querySelectorAll(".django-toast");
 
+    <script>
+    // SIMPLE MOBILE MENU TOGGLE - This will definitely work
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        console.log('Mobile menu button:', mobileMenuButton);
+        console.log('Mobile menu element:', mobileMenu);
+
+        if (mobileMenuButton && mobileMenu) {
+            // Toggle mobile menu when button is clicked
+            mobileMenuButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                console.log('Menu button clicked');
+
+                // Toggle the 'show' class
+                mobileMenu.classList.toggle('show');
+
+                // Change the icon
+                const icon = mobileMenuButton.querySelector('i');
+                if (mobileMenu.classList.contains('show')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                    console.log('Menu shown');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    console.log('Menu hidden');
+                }
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                    mobileMenu.classList.remove('show');
+                    const icon = mobileMenuButton.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Close menu when clicking on a link
+            const menuLinks = mobileMenu.querySelectorAll('a');
+            menuLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('show');
+                    const icon = mobileMenuButton.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+        } else {
+            console.error('Mobile menu elements not found!');
+        }
+
+        // Existing toast functionality
+        const toasts = document.querySelectorAll(".django-toast");
         toasts.forEach(toast => {
             setTimeout(() => {
                 toast.style.opacity = "0";
                 toast.style.transform = "translateY(-10px)";
                 setTimeout(() => toast.remove(), 300);
-            }, 4000); // visible for 4s
+            }, 4000);
         });
     });
-
     </script>
-  <script src="{% static 'assets/js/fix-images.js' %}"></script>
-  <script src="{% static 'assets/js/performance.js' %}"></script>
-  <script src="{% static 'assets/js/global-fixes.js' %}"></script>
-  <script src="{% static 'assets/js/aviation-products-data.js' %}"></script>
+
+    <script src="{% static 'assets/js/fix-images.js' %}"></script>
+    <script src="{% static 'assets/js/performance.js' %}"></script>
+    <script src="{% static 'assets/js/global-fixes.js' %}"></script>
+    <script src="{% static 'assets/js/aviation-products-data.js' %}"></script>
 </body>
 </html>
-
-
-
