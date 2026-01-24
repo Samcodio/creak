@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .cart import Cart
 from django.views.decorators.csrf import csrf_exempt
 from product.models import Product
-from django.template.loader import render_to_string
+from django.contrib import messages
 from django.http import JsonResponse
 import json
 
@@ -10,11 +10,14 @@ import json
 # listing items in the cart page
 def cart_summary(request):
     cart = Cart(request)
-    cart_products, total_sum = cart.get_prods()
-
+    cart_products, total_sum, subtotal, vat = cart.get_prods()
+    # print(f'vat', vat)
+    # print(f'subtotal', subtotal)
     context = {
         'cart_products': cart_products,
         'total_sum': total_sum,
+        'subtotal': subtotal,
+        'vat': vat
                }
     return render(request, 'Cart/cart_summary.html', context)
 
@@ -27,7 +30,7 @@ def cart_add(request):
     if request.POST.get('action') == 'post':
         # get stuff
         product_id = int(request.POST.get('product_id'))
-        quantity = int(request.POST.get('quantity'))
+        quantity = int(request.POST.get('quantity', 1))
 
         print(f"Received POST data: product_id={product_id}, quantity={quantity}")
 
@@ -65,12 +68,15 @@ def cart_delete(request):
             if product_id:
                 removed = cart.remove(product_id)
                 if removed:
-                    cart_products, total_sum = cart.get_prods()
+                    cart_products, total_sum, subtotal, vat = cart.get_prods()
                     total_quantity = cart.total_quantities()
 
                     return JsonResponse({
                         'success': True,
                         'total_quantity': total_quantity,
+                        'subtotal': str(subtotal),
+                        'vat': str(vat),
+                        'total_sum': str(total_sum),
                         'message': 'Item removed from cart'
                     })
 
@@ -87,3 +93,7 @@ def cart_delete(request):
 
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
+
+def cart_message(request):
+    messages.info(request, 'Contact Support To Proceed')
+    return redirect('cart:cart_summary')

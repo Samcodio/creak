@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'product',
     'cloudinary',
     'cart',
@@ -92,13 +93,13 @@ WSGI_APPLICATION = 'quick.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-
-database_url = "postgresql://quick_hg0f_user:0Xb8X4BcKXidfupsQH60VD6hD9jW527N@dpg-d5q9d1p5pdvs7390s910-a.virginia-postgres.render.com/quick_hg0f"
+#
+database_url = "postgres://avnadmin:AVNS_a_x4ITfWKc-ctP31X8u@pg-ba435c9-cybrongaming247-64dc.d.aivencloud.com:14803/defaultdb?sslmode=require"
 
 DATABASES = {
     "default": dj_database_url.parse(database_url)
 }
-
+DATABASES['default']['CONN_MAX_AGE'] = 60
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -135,10 +136,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # default storage cloundinary

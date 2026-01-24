@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block title %}
 <title>{{category.category_name}} | Aviation Spares & Repairs</title>
 {% endblock %}
@@ -32,9 +33,9 @@ input[type=number] {
                 <p class="text-sm text-gray-500 mb-4">Part #: {{product.parts}}</p>
                 <div id="product-pricing" class="mb-6">
                     {% if product.old_price %}
-                    <div class="text-lg text-gray-400 line-through">&pound; {{product.old_price}}</div>
+                    <div class="text-lg text-gray-400 line-through">&pound;{{product.old_price|floatformat:2|intcomma}}</div>
                     {% endif %}
-                    <div class="text-3xl font-bold text-aviation-blue">&pound; {{product.price}}</div>
+                    <div class="text-3xl font-bold text-aviation-blue">&pound;{{product.price|floatformat:2|intcomma}}</div>
                     <p class="text-sm text-gray-600 mt-1">Prices exclude VAT</p>
                 </div>
                 <div id="product-description" class="text-gray-600 mb-6"></div>
@@ -48,7 +49,7 @@ input[type=number] {
                 </div>
                 <div id="product-specs" class="mb-6"></div>
                 <div class="flex gap-4">
-                    <button type="button" id="add-to-cart" class="bg-aviation-blue text-white px-6 py-3 rounded font-bold hover:bg-blue-700 flex-1" data-product-id="{{ product.id }}">
+                    <button type="button" class="add-to-cart bg-aviation-blue text-white px-6 py-3 rounded font-bold hover:bg-blue-700 flex-1" data-product-id="{{ product.id }}">
                         Add to Cart</button>
                     <button onclick="{% url 'product:contact' %}" class="border border-aviation-blue text-aviation-blue px-6 py-3 rounded font-bold hover:bg-blue-50">Request Quote</button>
                 </div>
@@ -70,6 +71,7 @@ input[type=number] {
             </div>
         </div>
     </main>
+
 
 
 

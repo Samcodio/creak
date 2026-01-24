@@ -1,0 +1,63 @@
+/* Image Loading and Error Handling */
+img {
+    max-width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+}
+
+/* Loading state */
+img:not([src]) {
+    opacity: 0.5;
+    background: #f3f4f6;
+}
+
+/* Error handling for missing images */
+img[src*="our partners"] {
+    background: url('assets/images/partners/ejendals.jpg') center/contain no-repeat;
+}
+
+/* Fallback for product images */
+.product-image-container img {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+}
+
+/* Partner logo fallbacks */
+.partner-logo {
+    background: #f3f4f6;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Lazy loading optimization */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded {
+    opacity: 1;
+}
+
+/* Responsive image containers */
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container::before {
+    content: '';
+    display: block;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

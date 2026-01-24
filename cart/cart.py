@@ -1,5 +1,5 @@
 from product.models import Product, UserProfile
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 import json
 
 
@@ -35,13 +35,13 @@ class Cart():
                     }
                 })
             self.session.modified = True
-            # if self.request.user.is_authenticated:
-            #     current_user = UserProfile.objects.filter(user__id=self.request.user.id)
-            #     existing_products = Product.objects.filter(id__in=self.cart.keys())
-            #     updated_cart = {product_id: item for product_id, item in self.cart.items() if
-            #                     int(product_id) in existing_products.values_list('id', flat=True)}
-            #     cart_string = json.dumps(updated_cart)  # Convert cart dictionary to JSON string
-            #     current_user.update(old_cart=cart_string)
+            if self.request.user.is_authenticated:
+                current_user = UserProfile.objects.filter(user__id=self.request.user.id)
+                existing_products = Product.objects.filter(id__in=self.cart.keys())
+                updated_cart = {product_id: item for product_id, item in self.cart.items() if
+                                int(product_id) in existing_products.values_list('id', flat=True)}
+                cart_string = json.dumps(updated_cart)  # Convert cart dictionary to JSON string
+                current_user.update(old_cart=cart_string)
         except Product.DoesNotExist:
             # If the product does not exist, do not add it to the cart
             pass
@@ -60,14 +60,14 @@ class Cart():
                 }
             })
         self.session.modified = True
-        # if self.request.user.is_authenticated:
-        #     existing_products = Product.objects.filter(id__in=self.cart.keys())
-        #     updated_cart = {product_id: item for product_id, item in self.cart.items() if
-        #                     int(product_id) in existing_products.values_list('id', flat=True)}
-        #     carty = str(updated_cart)
-        #     carty = carty.replace("\'", "\"")
-        #     current_user = UserProfile.objects.filter(user__id=self.request.user.id)
-        #     current_user.update(old_cart=str(carty))
+        if self.request.user.is_authenticated:
+            existing_products = Product.objects.filter(id__in=self.cart.keys())
+            updated_cart = {product_id: item for product_id, item in self.cart.items() if
+                            int(product_id) in existing_products.values_list('id', flat=True)}
+            carty = str(updated_cart)
+            carty = carty.replace("\'", "\"")
+            current_user = UserProfile.objects.filter(user__id=self.request.user.id)
+            current_user.update(old_cart=str(carty))
 
     # updating cart(not needed for the project but am not ready to debug this shit if its working fine
     def update(self, product, quantity, size=None):
@@ -106,8 +106,9 @@ class Cart():
     def get_prods(self):
         self.remove_non_existent_products()  # Call the correct method
         products = []
-        total_sum = Decimal('0.00')
+        subtotal = Decimal('0.00')
         cart_keys = list(self.cart.keys())
+
         for product_id in cart_keys:
             try:
                 product = Product.objects.filter(sale=True).get(id=int(product_id))
@@ -122,10 +123,12 @@ class Cart():
                     'price': price,
                     'total_price': total_price,
                 })
-                total_sum = product_count * 1000
+                subtotal += total_price
             except Product.DoesNotExist:
                 pass
-        return products, total_sum
+        vat = (subtotal * Decimal('0.20')).quantize(Decimal('0.00'), rounding=ROUND_HALF_UP)
+        total_sum = (subtotal + vat).quantize(Decimal('0.00'), rounding=ROUND_HALF_UP)
+        return products, total_sum, subtotal, vat
 
     def get_cart_ids(self):
         return list(self.cart.keys())

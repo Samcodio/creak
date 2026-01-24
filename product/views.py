@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from .models import *
+from cart.cart import Cart
 
 # Create your views here.
 
@@ -10,11 +11,13 @@ def base(request):
 
 
 def home(request):
+    cart = Cart(request)
     category = Category.objects.all()
     products = Product.objects.all()[:12]
     context = {
         'category': category,
-        'products': products
+        'products': products,
+        'cart': cart
     }
     return render(request, 'index.html', context)
 
@@ -120,5 +123,6 @@ def product_detail(request, id):
         'product': product
     }
     return render(request, 'Product/product_detail.html', context)
+
 
 

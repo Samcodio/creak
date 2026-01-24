@@ -6,7 +6,6 @@ from django.conf.urls.static import static
 app_name = 'product'
 
 urlpatterns = [
-    path('base/', views.base, name='base'),
     path('', views.home, name='home'),
     # navbar
     path('contact/', views.contact, name='contact'),

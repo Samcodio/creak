@@ -8,14 +8,14 @@ import json
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
 # import resend
-# from cart.cart import Cart
+from cart.cart import Cart
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.core.mail import send_mail
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_decode
-from product.models import User, UserProfile
+from product.models import User, UserProfile, Product
 from django.contrib import messages
 # from django.conf import settings
 
@@ -34,21 +34,21 @@ def login_page(request):
             login(request, user)
             UserProfile.objects.get_or_create(user=user)
             #  shopping cart stuff
-            # current_user = UserProfile.objects.get(user__id=request.user.id)
-            # saved_cart = current_user.old_cart
-            # saved_wishlist = current_user.old_wishlist
-            # if saved_cart:
-            #     cart_string = saved_cart
-            #     cart_dict = json.loads(cart_string)  # Convert JSON string back to dictionary
-            #     cart = Cart(request)
-            #     cart.remove_non_existent_products()
-            #     for product_id, item in cart_dict.items():
-            #         try:
-            #             product = Product.objects.get(id=int(product_id))
-            #             quantity = item['quantity']['quantity']
-            #             cart.db_add(product, quantity)
-            #         except Product.DoesNotExist:
-            #             pass
+            current_user = UserProfile.objects.get(user__id=request.user.id)
+            saved_cart = current_user.old_cart
+            saved_wishlist = current_user.old_wishlist
+            if saved_cart:
+                cart_string = saved_cart
+                cart_dict = json.loads(cart_string)  # Convert JSON string back to dictionary
+                cart = Cart(request)
+                cart.remove_non_existent_products()
+                for product_id, item in cart_dict.items():
+                    try:
+                        product = Product.objects.get(id=int(product_id))
+                        quantity = item['quantity']['quantity']
+                        cart.db_add(product, quantity)
+                    except Product.DoesNotExist:
+                        pass
 
             if next_url:
                 messages.success(request, 'Login Successful')
