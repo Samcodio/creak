@@ -9,6 +9,18 @@
         :root { --aviation-blue: #005eb8; }
         .aviation-blue { color: var(--aviation-blue); }
         .bg-aviation-blue { background-color: var(--aviation-blue); }
+
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
 </style>
     <main class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
@@ -29,14 +41,15 @@
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Quantity</label>
                     <div class="flex items-center gap-4 mb-4">
-                        <button id="qty-minus" class="w-10 h-10 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-100">-</button>
-                        <input type="number" id="quantity" value="1" min="1" class="w-20 text-center border border-gray-300 rounded px-3 py-2">
-                        <button id="qty-plus" class="w-10 h-10 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-100">+</button>
+                        <button type="button" id="qty-minus" class="w-10 h-10 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-100">-</button>
+                        <input type="number" id="quantity" value="1" min="1" class="w-20 text-center border border-gray-300 rounded px-3 py-2" readonly>
+                        <button type="button" id="qty-plus" class="w-10 h-10 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-100">+</button>
                     </div>
                 </div>
                 <div id="product-specs" class="mb-6"></div>
                 <div class="flex gap-4">
-                    <button id="add-to-cart" class="bg-aviation-blue text-white px-6 py-3 rounded font-bold hover:bg-blue-700 flex-1">Add to Cart</button>
+                    <button type="button" id="add-to-cart" class="bg-aviation-blue text-white px-6 py-3 rounded font-bold hover:bg-blue-700 flex-1" data-product-id="{{ product.id }}">
+                        Add to Cart</button>
                     <button onclick="{% url 'product:contact' %}" class="border border-aviation-blue text-aviation-blue px-6 py-3 rounded font-bold hover:bg-blue-50">Request Quote</button>
                 </div>
             </div>
@@ -57,5 +70,7 @@
             </div>
         </div>
     </main>
+
+
 
 {% endblock %}

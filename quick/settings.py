@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'product',
     'cloudinary',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
+                'cart.context_processors.cart_items',
             ],
         },
     },
@@ -90,7 +93,7 @@ WSGI_APPLICATION = 'quick.wsgi.application'
 #     }
 # }
 
-database_url = "postgresql://creak_user:B0lXDlKHfLFPeV0ULDPwtVRi8ZdFhFnl@dpg-d53k5r63jp1c738n48j0-a.virginia-postgres.render.com/creak"
+database_url = "postgresql://quick_hg0f_user:0Xb8X4BcKXidfupsQH60VD6hD9jW527N@dpg-d5q9d1p5pdvs7390s910-a.virginia-postgres.render.com/quick_hg0f"
 
 DATABASES = {
     "default": dj_database_url.parse(database_url)

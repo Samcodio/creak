@@ -212,9 +212,9 @@
                     </div>
                 </div>
 
-                <a href="pages/navbar/checkout.html" id="cart-icon-container" class="relative cursor-pointer">
+                <a href="{% url 'cart:cart_summary' %}" id="cart-icon-container" class="relative cursor-pointer">
                     <i class="fas fa-shopping-cart text-gray-700 text-xl"></i>
-                    <span id="cart-count" class="absolute -top-1 -right-2 bg-gray-800 text-white text-[0.6rem] font-bold px-1.5 rounded-full">0</span>
+                    <span id="cart-count" class="absolute -top-1 -right-2 bg-gray-800 text-white text-[0.6rem] font-bold px-1.5 rounded-full">{{cart.total_quantities}}</span>
                 </a>
 
                 <!-- Mobile Menu Button -->
@@ -377,6 +377,60 @@
             }, 4000);
         });
     });
+
+
+
+    const qtyInput = document.getElementById("quantity");
+    const minusBtn = document.getElementById("qty-minus");
+    const plusBtn = document.getElementById("qty-plus");
+
+    minusBtn.addEventListener("click", () => {
+        let current = parseInt(qtyInput.value) || 1;
+        if (current > parseInt(qtyInput.min)) {
+            qtyInput.value = current - 1;
+        }
+    });
+
+    plusBtn.addEventListener("click", () => {
+        let current = parseInt(qtyInput.value) || 1;
+        qtyInput.value = current + 1;
+    });
+
+
+const addToCartBtn = document.getElementById("add-to-cart");
+const cartCount = document.getElementById("cart-count");
+
+addToCartBtn.addEventListener("click", function () {
+    const productId = this.dataset.productId;
+    const quantity = parseInt(document.getElementById("quantity").value, 10);
+
+    fetch("{% url 'cart:cart_add' %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+        body: new URLSearchParams({
+            action: "post",
+            product_id: productId,
+            quantity: quantity
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Added:", data);
+
+        // Update cart count **inside the .then()** after getting data
+        if (cartCount && data.qty !== undefined) {
+            cartCount.textContent = data.qty;
+        }
+    })
+    .catch(err => console.error("Cart error:", err));
+});
+
+
+
+
     </script>
 
     <script src="{% static 'assets/js/fix-images.js' %}"></script>
