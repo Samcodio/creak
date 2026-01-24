@@ -29,8 +29,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://creak.onrender.com",
-    "http://creak.onrender.com",
+    "https://creak-9w51.onrender.com/",
+    "http://creak-9w51.onrender.com",
 ]
 
 # Application definition
