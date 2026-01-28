@@ -17,7 +17,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_decode
 from product.models import User, UserProfile, Product
 from django.contrib import messages
-# from django.conf import settings
+from django.conf import settings
+import resend
 
 # Create your views here.
 
@@ -70,8 +71,25 @@ def signUp(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
+
+            user = form.save()
             messages.success(request, 'Account successfully created')
+            # Send email
+            subject = 'Welcome'
+            html_content = render_to_string('Email/email.html', {
+                'user': user,
+            })
+            try:
+                resend.Emails.send({
+                    "from": "contact@enac.ng",
+                    "to": user.email,
+                    "subject": subject,
+                    "html": html_content,
+                })
+            except Exception as e:
+                import traceback
+                print("EMAIL ERROR:", e)
+                traceback.print_exc()
             return redirect('accounts:login')
         else:
             # Loop through errors and push them into messages

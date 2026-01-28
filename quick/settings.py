@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
-import os, cloudinary, dj_database_url
+import os, cloudinary, dj_database_url, resend
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ui_y106w_11+h5$%bp_h8gb03y3!1%u3%ar+qqxpuz4k!x_c(9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'quick.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-#
+
 database_url = "postgres://avnadmin:AVNS_a_x4ITfWKc-ctP31X8u@pg-ba435c9-cybrongaming247-64dc.d.aivencloud.com:14803/defaultdb?sslmode=require"
 
 DATABASES = {
@@ -161,3 +161,8 @@ cloudinary.config(
     api_key='363466449134293',
     api_secret='biHImhWRz0fsh_sOgrlJqS1I5mg',
 )
+
+resend.api_key = "re_7jWi3QR4_9c8tbduw8MQkSucVDyjczdri"
+DEFAULT_FROM_EMAIL = 'contact@enac.ng'
+
+RESEND_API_KEY = 're_K2zQ25vg_JbQG6y9SEtzzQj3tUSFpna1h'
