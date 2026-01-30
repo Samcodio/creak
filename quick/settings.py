@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'quick.wsgi.application'
 #     }
 # }
 
-database_url = "postgres://avnadmin:AVNS_a_x4ITfWKc-ctP31X8u@pg-ba435c9-cybrongaming247-64dc.d.aivencloud.com:14803/defaultdb?sslmode=require"
+database_url = "postgresql://postgres.uzzhrpuzbjenzyshspxh:@Nosikesamuel2006@aws-1-us-east-1.pooler.supabase.com:5432/postgres"
 
 DATABASES = {
     "default": dj_database_url.parse(database_url)

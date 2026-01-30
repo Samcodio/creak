@@ -42,7 +42,7 @@ class UserProfile(models.Model):
 
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=255)
+    category_name = models.CharField(max_length=255, unique=True)
     description = models.CharField(max_length=255, null=True, blank=True)
     category_logo = CloudinaryField('image', null=True, blank=True)
 
@@ -76,6 +76,9 @@ class Product(models.Model):
     posted_on = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     # on sale?
     sale = models.BooleanField(default=True)
+
+    class Meta:
+        unique_together = ('product_name', 'category')
 
     def get_absolute_url(self):
         """this is used to get the detail url for order"""

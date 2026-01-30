@@ -28,4 +28,8 @@ urlpatterns = [
     path('products/', views.products, name='products'),
     path('categories/<int:id>', views.category, name='category'),
     path('detail32&-1r34/<int:id>', views.product_detail, name='product_detail'),
+#     admin
+    path('admin_panel/', views.admin_panel, name='admin_panel'),
+    path('del_cat/<int:id>', views.del_category, name='del_category'),
+    path('del_prod/<int:id>', views.del_product, name='del_product'),
 ]

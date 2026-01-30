@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomic Aviation Spare Parts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #534bae;
+            --primary-dark: #000051;
+            --secondary: #00695c;
+            --accent: #ffab00;
+            --danger: #d32f2f;
+            --success: #388e3c;
+            --warning: #f57c00;
+            --light: #f5f7fa;
+            --dark: #121212;
+            --gray: #757575;
+            --gray-light: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0c2461 0%, #1a237e 100%);
+            color: var(--light);
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 25px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            background: var(--accent);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            font-size: 28px;
+            box-shadow: 0 4px 10px rgba(255, 171, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .logo-text h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            background: linear-gradient(90deg, #ffab00, #ffd54f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .logo-text p {
+            color: var(--gray-light);
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 25px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px 20px;
+            text-align: center;
+            min-width: 120px;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-box:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--gray-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 5px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 18px 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: var(--transition);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .tab.active {
+            background: var(--accent);
+            color: var(--dark);
+            box-shadow: 0 4px 15px rgba(255, 171, 0, 0.4);
+        }
+
+        .tab i {
+            font-size: 18px;
+        }
+
+        /* Main Content */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--accent);
+        }
+
+        .section-title i {
+            background: rgba(255, 171, 0, 0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Form Styles */
+        .form-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .form-container:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--gray-light);
+            font-size: 15px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 15px 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 171, 0, 0.2);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background: #ffb300;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 171, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c62828;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(211, 47, 47, 0.4);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #2e7d32;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(56, 142, 60, 0.4);
+        }
+
+        .btn-sm {
+            padding: 10px 18px;
+            font-size: 14px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        /* Table Styles */
+        .table-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        thead {
+            background: rgba(255, 171, 0, 0.15);
+        }
+
+        th {
+            padding: 20px 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(255, 171, 0, 0.3);
+        }
+
+        td {
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            vertical-align: middle;
+        }
+
+        tbody tr {
+            transition: var(--transition);
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .status {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .status.available {
+            background: rgba(56, 142, 60, 0.2);
+            color: #81c784;
+        }
+
+        .status.low-stock {
+            background: rgba(245, 124, 0, 0.2);
+            color: #ffb74d;
+        }
+
+        .status.out-of-stock {
+            background: rgba(211, 47, 47, 0.2);
+            color: #e57373;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Category Products */
+        .category-products {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: none;
+        }
+
+        .category-products.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .products-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .product-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 18px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .product-tag:hover {
+            background: rgba(255, 171, 0, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .product-tag i {
+            color: var(--accent);
+            cursor: pointer;
+        }
+
+        .product-tag i:hover {
+            color: var(--danger);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a237e 0%, #0c2461 100%);
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            color: var(--accent);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 25px;
+            }
+
+            .stats {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .tab {
+                padding: 15px 5px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .form-container, .table-container {
+                padding: 20px;
+            }
+
+            .tab {
+                flex-direction: column;
+                gap: 5px;
+                padding: 12px 5px;
+            }
+
+            .stats {
+                flex-wrap: wrap;
+            }
+
+            .stat-box {
+                flex: 1;
+                min-width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 22px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .stat-box {
+                min-width: 100%;
+            }
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gray);
+        }
+
+        .empty-state i {
+            font-size: 70px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.1);
+        }
+
+        .empty-state p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 18px 25px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 9999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(150%);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: var(--success);
+            border-left: 5px solid #2e7d32;
+        }
+
+        .notification.error {
+            background: var(--danger);
+            border-left: 5px solid #c62828;
+        }
+
+        .notification.info {
+            background: var(--primary);
+            border-left: 5px solid #534bae;
+        }
+
+        .notification i {
+            font-size: 20px;
+        }
+
+
+        /* =========================
+   TOAST CONTAINER
+========================= */
+#django-toast-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    pointer-events: none;
+}
+
+/* =========================
+   BASE TOAST
+========================= */
+.django-toast {
+    min-width: 280px;
+    max-width: 420px;
+    padding: 14px 18px;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: #000; /* BLACK TEXT */
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: toast-slide 0.35s ease forwards;
+
+    pointer-events: auto;
+}
+
+/* =========================
+   MESSAGE TYPES
+========================= */
+.django-toast.success {
+    background-color: #d1fae5; /* green */
+}
+
+.django-toast.error {
+    background-color: #fee2e2; /* red */
+}
+
+.django-toast.warning {
+    background-color: #fef3c7; /* yellow */
+}
+
+.django-toast.info {
+    background-color: #e0f2fe; /* blue */
+}
+
+/* =========================
+   FIELD ERROR (STRICT RED)
+========================= */
+.django-toast.field-error {
+    background-color: #dc2626; /* strong red */
+    color: #000;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+@keyframes toast-slide {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Notification System -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-text">Operation successful!</span>
+    </div>
+
+    <!-- Modal for Edit Forms -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Edit Product</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div id="modal-body">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo-container">
+                <a href="{% url 'product:home' %}">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>ATOMIC AVIATION SPARE</h1>
+                        <p>AIRCRAFT PARTS INVENTORY MANAGEMENT</p>
+                    </div>
+                </div>
+                </a>
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="total-products">{{prod_count}}</div>
+                        <div class="stat-label">Total Products</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="total-categories">{{cat_count}}</div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="low-stock">0</div>
+                        <div class="stat-label">Low Stock</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="nav-tabs">
+                <div class="tab active" data-tab="create-product">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Create Product</span>
+                </div>
+                <div class="tab" data-tab="product-list">
+                    <i class="fas fa-boxes"></i>
+                    <span>Product List</span>
+                </div>
+                <div class="tab" data-tab="create-category">
+                    <i class="fas fa-tags"></i>
+                    <span>Create Category</span>
+                </div>
+            </div>
+        </header>
+
+            <!-- Django Messages Toast -->
+            {% if messages %}
+            <div id="django-toast-container">
+                {% for message in messages %}
+                    <div class="django-toast {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+        <!-- Create Product Section -->
+        <section id="create-product" class="content-section active">
+            <h2 class="section-title">
+                <i class="fas fa-plus-circle"></i>
+                Create New Product
+            </h2>
+
+            <div class="form-container">
+                <form id="product-form" class="prevent-multi-submit" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-name"><i class="fas fa-box"></i> Product Name</label>
+                            {{prodform.product_name}}
+                        </div>
+                        <div class="form-group">
+                            <label for="product-name"><i class="fas fa-tag"></i> Category</label>
+                            {{prodform.category}}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-code"><i class="fas fa-dollar-sign"></i> Selling Price</label>
+                            {{prodform.price}}
+                        </div>
+                        <div class="form-group">
+                            <label for="product-price"><i class="fas fa-dollar-sign"></i> Discounted Price</label>
+                            {{prodform.old_price}}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-quantity"><i class="fas fa-image"></i> Product Image </label>
+                            {{prodform.product_img}}
+                        </div>
+                        <div class="form-group">
+                            <label for="product-quantity"><i class="fas fa-check-circle"></i> Parts </label>
+                            {{prodform.parts}}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-status"><i class="fas fa-layer-group"></i> Description <small>*optional</small></label>
+                            {{prodform.description}}
+                        </div>
+                    </div>
+
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" name="product">
+                            <i class="fas fa-save"></i>
+                            Save Product
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i>
+                            Clear Form
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Product List Section -->
+        <section id="product-list" class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-boxes"></i>
+                Product List
+            </h2>
+
+            <div class="table-container">
+                <table id="products-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Parts</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-table-body">
+                        {% for x in products %}
+                        <tr>
+                        <td>
+                            <div style="font-weight: 600;">{{x.product_name}}</div>
+                            <div style="font-size: 13px; color: var(--gray-light); margin-top: 5px;">{{x.description}}</div>
+                        </td>
+                        <td>{{x.category}}</td>
+                        <td>{{x.parts}}</td>
+                        <td>
+                            &pound;{{x.price}}
+                            {% if x.old_price %}
+                            <div style="font-size: 13px; color: var(--gray-light); margin-top: 5px;">
+                                <del>&pound;{{x.old_price}}</del></div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a href="{% url 'product:del_product' x.id %}">
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </a>
+                                <a href="{% url 'product:product_detail' x.id %}">
+                                    <button class="btn btn-primary btn-sm" >
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                        {% endfor %}
+                        <tr class="empty-row">
+                            <td colspan="7">
+                                <div class="empty-state">
+                                    <i class="fas fa-box-open"></i>
+                                    <p>No products found. Add your first product!</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Create Category Section -->
+        <section id="create-category" class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-tags"></i>
+                Categories Management
+            </h2>
+
+            <div class="form-container">
+                <form id="category-form" class="prevent-multi-submit" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="category-name"><i class="fas fa-tag"></i> Category Name</label>
+                            {{catform.category_name}}
+                        </div>
+                        <div class="form-group">
+                            <label for="category-code"><i class="fas fa-code"></i> Category Logo</label>
+                            {{catform.category_logo}}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category-description"><i class="fas fa-file-alt"></i> Description</label>
+                        {{catform.description}}
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success" name="category">
+                            <i class="fas fa-plus-circle"></i>
+                            Create Category
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i>
+                            Clear Form
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="table-container" style="margin-top: 40px;">
+                <table id="categories-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Products Count</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="categories-table-body">
+                        {% for x in categories %}
+                            <tr>
+                            <td>
+                                <div style="font-weight: 600;"><strong>{{x.category_name}}</strong></div>
+                                <div style="font-size: 13px; color: var(--gray-light); margin-top: 5px;">{{x.description}}</div>
+                            </td>
+                            <td>
+                                <span style="font-weight: 600; color: ${productCount > 0 ? 'var(--accent)' : 'var(--gray)'}">
+                                    {{x.catCount}}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="actions">
+                                    <a href="{% url 'product:del_category' x.id %}">
+                                        <button class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </a>
+                                    <a href="{% url 'product:category' x.id %}">
+                                        <button class="btn btn-primary btn-sm" >
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Existing toast functionality
+        const toasts = document.querySelectorAll(".django-toast");
+        toasts.forEach(toast => {
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                toast.style.transform = "translateY(-10px)";
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        });
+
+        // Data storage
+        let products = JSON.parse(localStorage.getItem('atomicAviationProducts')) || [];
+        let categories = JSON.parse(localStorage.getItem('atomicAviationCategories')) || [
+            { id: 1, code: 'ENG', name: 'Engine Parts', description: 'Aircraft engine components', products: [] },
+            { id: 2, code: 'AVN', name: 'Avionics', description: 'Electronic systems for aircraft', products: [] },
+            { id: 3, code: 'FUS', name: 'Fuselage', description: 'Aircraft body components', products: [] },
+            { id: 4, code: 'LND', name: 'Landing Gear', description: 'Landing systems and components', products: [] }
+        ];
+
+        // Initialize IDs for auto-increment
+        let nextProductId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+        let nextCategoryId = categories.length > 0 ? Math.max(...categories.map(c => c.id)) + 1 : 5;
+
+        // DOM Elements
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notification-text');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const modalClose = document.getElementById('modal-close');
+        const tabs = document.querySelectorAll('.tab');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        // Stats elements
+        const totalProductsEl = document.getElementById('total-products');
+        const totalCategoriesEl = document.getElementById('total-categories');
+        const lowStockEl = document.getElementById('low-stock');
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initApp();
+            updateStats();
+            renderProductsTable();
+            renderCategoriesTable();
+            populateCategoryDropdown();
+
+            // Set up event listeners
+            setupEventListeners();
+        });
+
+        function initApp() {
+            // If localStorage is empty, add some sample data
+            if (products.length === 0) {
+                products = [
+                    { id: 1, code: 'ENG-001', name: 'Turbine Blade', category: 'ENG', price: 1250.50, quantity: 15, status: 'available', description: 'High-pressure turbine blade for CFM56 engine' },
+                    { id: 2, code: 'AVN-001', name: 'Flight Computer', category: 'AVN', price: 8500.00, quantity: 3, status: 'low-stock', description: 'Primary flight computer for Boeing 737' },
+                    { id: 3, code: 'FUS-001', name: 'Cabin Window', category: 'FUS', price: 3200.75, quantity: 8, status: 'available', description: 'Passenger cabin window assembly' },
+                    { id: 4, code: 'LND-001', name: 'Main Landing Gear', category: 'LND', price: 18500.00, quantity: 0, status: 'out-of-stock', description: 'Complete main landing gear assembly' }
+                ];
+                saveProducts();
+
+                // Add sample products to categories
+                categories[0].products.push(1);
+                categories[1].products.push(2);
+                categories[2].products.push(3);
+                categories[3].products.push(4);
+                saveCategories();
+            }
+        }
+
+        function setupEventListeners() {
+            // Tab switching
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    // Show corresponding section
+                    contentSections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === tabId) {
+                            section.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+
+            // Modal close
+            modalClose.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        }
+
+
+
+
+
+        function renderProductsTable() {
+            const tbody = document.getElementById('products-table-body');
+
+            if (products.length === 0) {
+                tbody.innerHTML = `
+                    <tr class="empty-row">
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-box-open"></i>
+                                <p>No products found. Add your first product!</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+        }
+
+        function renderCategoriesTable() {
+            const tbody = document.getElementById('categories-table-body');
+
+            if (categories.length === 0) {
+                tbody.innerHTML = `
+                    <tr class="empty-row">
+                        <td colspan="4">
+                            <div class="empty-state">
+                                <i class="fas fa-tags"></i>
+                                <p>No categories found. Add your first category!</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+
+        }
+
+        function populateCategoryDropdown() {
+            const dropdown = document.getElementById('product-category');
+            const editDropdown = document.getElementById('edit-product-category');
+
+
+        }
+
+        function updateStats() {
+
+        }
+
+        function showNotification(message, type = 'info') {
+            notificationText.textContent = message;
+            notification.className = `notification ${type}`;
+
+            // Update icon based on type
+            const icon = notification.querySelector('i');
+            switch (type) {
+                case 'success':
+                    icon.className = 'fas fa-check-circle';
+                    break;
+                case 'error':
+                    icon.className = 'fas fa-exclamation-circle';
+                    break;
+                default:
+                    icon.className = 'fas fa-info-circle';
+                    break;
+            }
+
+            // Show notification
+            notification.classList.add('show');
+
+            // Auto-hide after 4 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+        }
+
+        function saveProducts() {
+            localStorage.setItem('atomicAviationProducts', JSON.stringify(products));
+        }
+
+        function saveCategories() {
+            localStorage.setItem('atomicAviationCategories', JSON.stringify(categories));
+        }
+
+        // Make functions available globally for inline event handlers
+        window.editProduct = editProduct;
+        window.deleteProduct = deleteProduct;
+        window.editCategory = editCategory;
+        window.deleteCategory = deleteCategory;
+        window.toggleCategoryProducts = toggleCategoryProducts;
+
+    </script>
+</body>
+</html>

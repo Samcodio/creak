@@ -196,6 +196,11 @@ s0.parentNode.insertBefore(s1,s0);
                 {% else %}
                 <a href="{% url 'accounts:logout' %}" class="hover:text-aviation-blue transition-colors">LOGOUT</a>
                 {% endif %}
+                {% if request.user.is_superuser %}
+                <a href="{% url 'product:admin_panel' %}" class="hover:text-aviation-blue transition-colors">ADMIN</a>
+                {% endif %}
+
+
             </nav>
 
             <!-- Search & Cart -->
@@ -251,6 +256,9 @@ s0.parentNode.insertBefore(s1,s0);
                 <a href="{% url 'accounts:login' %}" class="block text-sm font-bold text-gray-700 hover:text-aviation-blue py-2">LOGIN</a>
                 {% else %}
                 <a href="{% url 'accounts:logout' %}" class="block text-sm font-bold text-gray-700 hover:text-aviation-blue py-2">LOGOUT</a>
+                {% endif %}
+                {% if request.user.is_superuser %}
+                <a href="{% url 'product:admin_panel' %}" class="block text-sm font-bold text-gray-700 hover:text-aviation-blue py-2">ADMIN</a>
                 {% endif %}
             </nav>
         </div>
